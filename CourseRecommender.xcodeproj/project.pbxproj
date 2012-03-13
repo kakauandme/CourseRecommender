@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		632AB459150F166200123D50 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 632AB458150F166200123D50 /* main.cpp */; };
 		632AB45B150F166200123D50 /* CourseRecommender.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 632AB45A150F166200123D50 /* CourseRecommender.1 */; };
+		63BF6A9C150F5FDD00BA88BC /* Student.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63BF6A9B150F5FDD00BA88BC /* Student.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,8 @@
 		632AB454150F166200123D50 /* CourseRecommender */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CourseRecommender; sourceTree = BUILT_PRODUCTS_DIR; };
 		632AB458150F166200123D50 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		632AB45A150F166200123D50 /* CourseRecommender.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CourseRecommender.1; sourceTree = "<group>"; };
+		63BF6A9A150F5FC000BA88BC /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
+		63BF6A9B150F5FDD00BA88BC /* Student.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Student.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +65,8 @@
 			children = (
 				632AB458150F166200123D50 /* main.cpp */,
 				632AB45A150F166200123D50 /* CourseRecommender.1 */,
+				63BF6A9A150F5FC000BA88BC /* Student.h */,
+				63BF6A9B150F5FDD00BA88BC /* Student.cpp */,
 			);
 			path = CourseRecommender;
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				632AB459150F166200123D50 /* main.cpp in Sources */,
+				63BF6A9C150F5FDD00BA88BC /* Student.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +210,7 @@
 				632AB460150F166200123D50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
