@@ -14,20 +14,22 @@
 #endif
 
 
-#include <iostream>
-
-
 class Student{
 private:
+    
     int id;
     bool undergraduate;
     bool female;
     bool local;
     int gpa;
+    
+    
 public:
+    
     Student();
-    Student(int id, bool undergraduate, bool female, bool local, int gpa);
-    Student(char* path);
+    Student(int, bool, bool, bool, int);
+    Student(char*);
+    
     int Id();
     bool Undergraduate();
     bool Female();
