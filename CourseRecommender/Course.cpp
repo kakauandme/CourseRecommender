@@ -41,7 +41,7 @@ int Course::Tutor()
 {
     return tutor;
 }
-bool    Course::Elective()
+bool Course::Elective()
 {
     return elective;
 }
