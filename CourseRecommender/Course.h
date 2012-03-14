@@ -13,7 +13,7 @@
 
 #endif
 
-const int studentsCount = 10;
+const unsigned studentsCount = 10;
 
 class Course{
 private:
@@ -23,8 +23,7 @@ private:
     int tutor;
     bool elective;
     int students[studentsCount];
-    
-    
+
 public:
     
     Course();
