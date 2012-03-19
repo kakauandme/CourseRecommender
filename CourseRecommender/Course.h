@@ -19,7 +19,7 @@ class Course{
 private:
     
     int id;
-    int lecture;
+    int lecturer;
     int tutor;
     bool elective;
     int students[studentsCount];
@@ -31,7 +31,7 @@ public:
     Course(char*);
     
     int Id();
-    int Lecture();
+    int Lecturer();
     int Tutor();
     bool Elective();
     int* Students();

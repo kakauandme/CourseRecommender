@@ -11,14 +11,14 @@
 
 Course::Course()
 {
-    id=lecture=tutor=elective=0;
+    id=lecturer=tutor=elective=0;
     for (int i=0; i<studentsCount; i++)
         students[i]=0;
 }
-Course::Course(int id, int lecture, int tutor, bool elective, int* students)
+Course::Course(int id, int lecturer, int tutor, bool elective, int* students)
 {
     this->id = id;
-    this->lecture = lecture;
+    this->lecturer = lecturer;
     this->tutor = tutor;
     this->elective = elective;
     for (int i =0; i<studentsCount; i++)
@@ -33,9 +33,9 @@ int Course::Id()
 {
     return id;
 }
-int Course::Lecture()
+int Course::Lecturer()
 {
-    return lecture;
+    return lecturer;
 }
 int Course::Tutor()
 {
