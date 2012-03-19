@@ -19,7 +19,7 @@ Student::Student(int id, bool undergraduate, bool female, bool local, int gpa)
     this->local = local;
     this->gpa = gpa;
 }
-Student::Student(char* path)
+Student::Student(char* record)
 {
     //read from file
 }

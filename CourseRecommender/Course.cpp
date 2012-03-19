@@ -24,7 +24,7 @@ Course::Course(int id, int lecture, int tutor, bool elective, int* students)
     for (int i =0; i<studentsCount; i++)
         this->students[i] = students[i];    
 }
-Course::Course(char* path)
+Course::Course(char* record)
 {
     //read from file
 }
