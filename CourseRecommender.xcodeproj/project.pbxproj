@@ -34,6 +34,8 @@
 		63BF6A9B150F5FDD00BA88BC /* Student.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Student.cpp; sourceTree = "<group>"; };
 		63BF6A9D150F647E00BA88BC /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Course.h; sourceTree = "<group>"; };
 		63BF6A9E150F649E00BA88BC /* Course.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Course.cpp; sourceTree = "<group>"; };
+		BB14279C1516F2D200653B6A /* course.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = course.csv; sourceTree = "<group>"; };
+		BB14279D1516F2D200653B6A /* student.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = student.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,8 @@
 		632AB457150F166200123D50 /* CourseRecommender */ = {
 			isa = PBXGroup;
 			children = (
+				BB14279C1516F2D200653B6A /* course.csv */,
+				BB14279D1516F2D200653B6A /* student.csv */,
 				632AB458150F166200123D50 /* main.cpp */,
 				632AB45A150F166200123D50 /* CourseRecommender.1 */,
 				63BF6A9A150F5FC000BA88BC /* Student.h */,
