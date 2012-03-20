@@ -10,6 +10,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <unistd.h>
 #include "Student.h"
 #include "Course.h"
 using namespace std;
@@ -41,7 +42,20 @@ vector<Student> readStudents(string path)
     
     vector<Student> students;    
     string line;
-    const char*  tmp = path.c_str();
+    
+    /*
+     char *curpath=NULL;
+     size_t size;
+     curpath=getcwd(curpath, size);
+     string longPath = string(curpath);
+     
+     longPath+="/";
+     longPath+=path;
+     
+     cout<< longPath <<endl;
+     */
+    
+    
     ifstream myfile (path.c_str());
     if (myfile.is_open())
     {
@@ -59,9 +73,22 @@ vector<Student> readStudents(string path)
 
 vector<Course> readCourses(string path)
 {
-    
     vector<Course> students;    
     string line;
+    
+    /*
+    char *curpath=NULL;
+    size_t size;
+    curpath=getcwd(curpath, size);
+    string longPath = string(curpath);
+    
+    longPath+="/";
+    longPath+=path;
+    
+    cout<< longPath <<endl;
+    */
+    
+    
     ifstream myfile (path.c_str());
     if (myfile.is_open())
     {
