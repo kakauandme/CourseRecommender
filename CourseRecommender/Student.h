@@ -13,6 +13,7 @@
 
 #endif
 
+#include <string>
 
 class Student{
 private:
@@ -21,14 +22,14 @@ private:
     bool undergraduate;
     bool female;
     bool local;
-    int gpa;
+    float gpa;
     
     
 public:
     
     Student();
     Student(int, bool, bool, bool, int);
-    Student(char*);
+    Student(std::string);
     
     int Id();
     bool Undergraduate();

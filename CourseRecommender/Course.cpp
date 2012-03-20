@@ -24,9 +24,29 @@ Course::Course(int id, int lecturer, int tutor, bool elective, int* students)
     for (int i =0; i<studentsCount; i++)
         this->students[i] = students[i];    
 }
-Course::Course(char* record)
+Course::Course(std::string record)
 {
-    //read from file
+    
+    //try{
+    
+        //string->char* !magic!
+        const char* number = std::strtok (const_cast<char*>(record.c_str()),",");
+        id = atoi(number);
+        
+        number = strtok (NULL, ",");
+        lecturer = atoi(number);
+        
+        number = strtok (NULL, ",");
+        tutor = atoi(number);
+        
+        number = strtok (NULL, ",");
+        elective= atoi(number);
+        
+        for (int i =0; i<studentsCount; i++) {
+            number = strtok (NULL, ",");
+            students[i] = atoi(number);
+        }
+    //}catch(){}
 }
 
 int Course::Id()

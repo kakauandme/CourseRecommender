@@ -13,6 +13,8 @@
 
 #endif
 
+#include <string>
+
 const unsigned studentsCount = 10;
 
 class Course{
@@ -28,7 +30,7 @@ public:
     
     Course();
     Course(int,int,int,bool, int*);
-    Course(char*);
+    Course(std::string);
     
     int Id();
     int Lecturer();

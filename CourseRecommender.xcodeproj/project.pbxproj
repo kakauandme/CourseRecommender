@@ -30,12 +30,12 @@
 		632AB454150F166200123D50 /* CourseRecommender */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CourseRecommender; sourceTree = BUILT_PRODUCTS_DIR; };
 		632AB458150F166200123D50 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		632AB45A150F166200123D50 /* CourseRecommender.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CourseRecommender.1; sourceTree = "<group>"; };
+		633109461518AC4C0084882F /* course.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = course.csv; sourceTree = "<group>"; };
+		633109471518AC4C0084882F /* student.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = student.csv; sourceTree = "<group>"; };
 		63BF6A9A150F5FC000BA88BC /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
 		63BF6A9B150F5FDD00BA88BC /* Student.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Student.cpp; sourceTree = "<group>"; };
 		63BF6A9D150F647E00BA88BC /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Course.h; sourceTree = "<group>"; };
 		63BF6A9E150F649E00BA88BC /* Course.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Course.cpp; sourceTree = "<group>"; };
-		BB14279C1516F2D200653B6A /* course.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = course.csv; sourceTree = "<group>"; };
-		BB14279D1516F2D200653B6A /* student.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = student.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +52,8 @@
 		632AB449150F166100123D50 = {
 			isa = PBXGroup;
 			children = (
+				633109461518AC4C0084882F /* course.csv */,
+				633109471518AC4C0084882F /* student.csv */,
 				632AB457150F166200123D50 /* CourseRecommender */,
 				632AB455150F166200123D50 /* Products */,
 			);
@@ -68,8 +70,6 @@
 		632AB457150F166200123D50 /* CourseRecommender */ = {
 			isa = PBXGroup;
 			children = (
-				BB14279C1516F2D200653B6A /* course.csv */,
-				BB14279D1516F2D200653B6A /* student.csv */,
 				632AB458150F166200123D50 /* main.cpp */,
 				632AB45A150F166200123D50 /* CourseRecommender.1 */,
 				63BF6A9A150F5FC000BA88BC /* Student.h */,
