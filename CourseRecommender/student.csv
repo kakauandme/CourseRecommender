@@ -1,0 +1,12 @@
+#Some common traits: females tend to perform better, pg tend to perform better, postgrad female best, undergrad male worst
+#student,undergrad,female,local,gpa
+1,1,1,1,3
+2,1,1,0,3
+3,0,0,1,3
+4,0,1,1,4
+5,0,0,0,3
+6,1,0,0,1
+7,1,0,1,1
+8,1,1,0,4
+9,0,0,1,3
+10,1,0,1,2
