@@ -19,9 +19,27 @@ Student::Student(int id, bool undergraduate, bool female, bool local, int gpa)
     this->local = local;
     this->gpa = gpa;
 }
-Student::Student(char* record)
+Student::Student(std::string record)
 {
-    //read from file
+     //try{
+    
+        //string->char* !magic!
+        const char* number = std::strtok (const_cast<char*>(record.c_str()),",");
+        id = atoi(number);
+        
+        number = strtok (NULL, ",");
+        undergraduate = atoi(number);
+        
+        number = strtok (NULL, ",");
+        female = atoi(number);
+        
+        number = strtok (NULL, ",");
+        local = atoi(number);
+        
+        number = strtok (NULL, ",");
+        gpa = atof(number);  
+    
+    //}catch(){}
 }
 int Student::Id()
 {

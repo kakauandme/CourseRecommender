@@ -1,4 +1,4 @@
-#course,lecturer,tutor,core,student_1,student_2,....student_10
+#course,lecturer,tutor,core,student_1,student_2,student_3,student_4,student_5,student_6,student_7,student_8,student_9,student_10
 #Some common traits: lecturer 1 unliked, lecturer 2 liked, course 4 unliked (difficult course), tutor 5 liked, core subject always unliked (unless pg)
 #unliked lecturer (1)
 1,1,1,1,2,1,3,,3,2,1,4,3,2
