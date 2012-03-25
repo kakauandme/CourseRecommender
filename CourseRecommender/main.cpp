@@ -11,15 +11,21 @@
 #include <vector>
 #include <string>
 #include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "Student.h"
 #include "Course.h"
 using namespace std;
 
 #define stdcnt 10
+#define EXTRA_CHAR 1
+#define MAX_LINE_LENGTH 1024
 
 //it is possible to write method,
 //but we have to make virtual class
 //with makeFromFromString(string) method
+vector<Student> readStudents_c(FILE *);
 vector<Student> readStudents(string);
 vector<Course> readCourses(string);
 
@@ -27,15 +33,20 @@ vector<Course> readCourses(string);
 
 int main (int argc, const char * argv[])
 {
-    vector<Student> students = readStudents("student.csv");
-    vector<Course> courses = readCourses("course.csv");
+    
+    vector<Student> students;// = readStudents("student.csv");
+    vector<Course> courses;// = readCourses("course.csv");
+
+    FILE * f;
+    if((f = fopen("student.csv", "r"))){
+        students = readStudents_c(f);
+    }
+   
     // insert code here...
     cout << "Students count:\t"<< students.size() << endl;
     cout << "Courses count:\t" << courses.size() << endl;
     return 0;
 }
-
-
 
 vector<Student> readStudents(string path)
 {
