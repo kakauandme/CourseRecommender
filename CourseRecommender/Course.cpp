@@ -21,7 +21,7 @@ Course::Course(int id, int lecturer, int tutor, bool elective, int* students)
     this->lecturer = lecturer;
     this->tutor = tutor;
     this->elective = elective;
-    for (int i =0; i<studentsCount; i++)
+    for (int i=0; i<studentsCount; i++)
         this->students[i] = students[i];    
 }
 Course::Course(char* record)
