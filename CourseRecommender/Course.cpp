@@ -20,9 +20,20 @@ Course::Course(int id, int lecturer, int tutor, bool elective, int* students)
     this->id = id;
     this->lecturer = lecturer;
     this->tutor = tutor;
-    this->elective = elective;
+    this->elective = elective; 
+        for (int i=0; i<studentsCount; i++)
+            this->students[i] = students[i];
+        
+}
+Course::Course(int id, int lecturer, int tutor, bool elective)
+{
+    this->id = id;
+    this->lecturer = lecturer;
+    this->tutor = tutor;
+    this->elective = elective; 
     for (int i=0; i<studentsCount; i++)
-        this->students[i] = students[i];    
+        this->students[i] = 0;
+    
 }
 Course::Course(std::string record)
 {

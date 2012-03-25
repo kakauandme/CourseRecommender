@@ -31,6 +31,7 @@ public:
     
     Course();
     Course(int,int,int,bool, int*);
+    Course(int,int,int,bool);
     Course(std::string);
     
     int Id();

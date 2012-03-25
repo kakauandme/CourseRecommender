@@ -18,7 +18,7 @@
 #include "Course.h"
 using namespace std;
 
-#define stdcnt 10
+#define STD_CNT 10
 
 #define NUMBER_OF_COURSES 4
 
@@ -26,20 +26,20 @@ using namespace std;
 
 const float STUDENTWEIGHTS[4] = {0.2,02,01,0.5};
 const float COURSEWEIGHTS[4] = {0.4,0.2,0.1,0.3};
-
+typedef struct NewStudentType 
+{
+    Student studentInfo;
+    Course  courseInfo[NUMBER_OF_COURSES];
+} NewStudent;
 
 //it is possible to write method,
 //but we have to make virtual class
 //with makeFromFromString(string) method
 vector<Student> readStudents(string);
 vector<Course> readCourses(string);
-void createNewStudent();
+NewStudent createNewStudent();
 
-typedef struct NewStudentType 
-{
-    Student studentInfo;
-    Course  courseInfo[NUMBER_OF_COURSES];
-} NewStudent;
+
 
 bool generateWekaFile(vector<Student>, vector<Course>);
 
@@ -56,6 +56,7 @@ int main (int argc, const char * argv[])
     cout << "Students count:\t"<< students.size() << endl;
     cout << "Courses count:\t" << courses.size() << endl;
     generateWekaFile(students, courses);
+    newStudent = createNewStudent();
     return 0;
 }
 
@@ -162,42 +163,47 @@ vector<Course> readCourses(string path)
 }
 
 
-void createNewStudent()
+NewStudent createNewStudent()
 {
+    NewStudent newStudent;
     bool u,f,l;
     int gpa;
     
     cout << "Enter new student details \n";
     cout << "Undergraduate:\t";
     cin >> u;
-    cout << endl;
     cout << "Female:\t";
     cin >> f;
-    cout << endl;
     cout << "Local:\t";
     cin >> l;
-    cout << endl;
     cout << "GPA:\t";
     cin >>  gpa;
     cout << endl << endl;
     
-    Student newStudent = Student(0,u,f,l,gpa);
+    newStudent.studentInfo=Student(0,u,f,l,gpa);
     
-    int c,l,t;
+    int c,le,t;
     bool e;
-    
-    cout << "Enter corses details\n";
-    
-    cout << "Course:\t";
-    cin >> c;
-    cout << endl;
-    cout << "Lecturer:\t";
-    cin >> l;
-    cout << endl;
-    cout << "Tutor:\t";
-    cin >> t;
-    cout << endl;
-    cout << "Elective\t";
-    cin >> e;   
+    for (int i=0; i<NUMBER_OF_COURSES; i++) {
+            
+        
+        cout << "Enter corses " << i+1 <<" details\n";
+        
+        cout << "Course:\t";
+        cin >> c;
+
+        cout << "Lecturer:\t";
+        cin >> le;
+
+        cout << "Tutor:\t";
+        cin >> t;
+
+        cout << "Elective\t";
+        cin >> e; 
+        newStudent.courseInfo[i] = Course(c,le,t,e);
+        cout << endl << endl;
+    }
+    cout << "end";
+    return newStudent;
     
 }
