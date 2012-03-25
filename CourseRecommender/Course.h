@@ -14,6 +14,7 @@
 #endif
 
 #include <string>
+#include <math.h>
 
 const unsigned studentsCount = 10;
 
@@ -37,4 +38,6 @@ public:
     int Tutor();
     bool Elective();
     int* Students();
+    float norm(float*);
+
 };

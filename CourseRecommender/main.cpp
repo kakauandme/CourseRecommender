@@ -19,14 +19,18 @@
 using namespace std;
 
 #define stdcnt 10
-#define EXTRA_CHAR 1
-#define MAX_LINE_LENGTH 1024
+
 #define NUMBER_OF_COURSES 4
+
+
+
+const float STUDENTWEIGHTS[4] = {0.2,02,01,0.5};
+const float COURSEWEIGHTS[4] = {0.4,0.2,0.1,0.3};
+
 
 //it is possible to write method,
 //but we have to make virtual class
 //with makeFromFromString(string) method
-vector<Student> readStudents_c(FILE *);
 vector<Student> readStudents(string);
 vector<Course> readCourses(string);
 
@@ -37,6 +41,8 @@ typedef struct NewStudentType
 } NewStudent;
 
 bool generateWekaFile(vector<Student>, vector<Course>);
+
+
 
 int main (int argc, const char * argv[])
 {

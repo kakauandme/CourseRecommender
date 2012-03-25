@@ -14,6 +14,7 @@
 #endif
 
 #include <string>
+#include <math.h>
 
 class Student{
 private:
@@ -36,5 +37,7 @@ public:
     bool Female();
     bool Local();
     int GPA();
+    float norm(float*);
+    
         
 };

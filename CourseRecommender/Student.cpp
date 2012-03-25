@@ -61,3 +61,11 @@ int Student::GPA()
 {
     return gpa;
 }
+
+float Student::norm(float* weights){
+    float weight = 0.0f;
+    
+    weight = sqrt(weights[0]*undergraduate + weights[1]*female + weights[2]*local + weights[3]*gpa);
+    
+    return weight;
+}

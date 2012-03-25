@@ -71,3 +71,12 @@ int* Course::Students()
 {
     return students;
 }
+
+
+float Course::norm(float* weights){
+    float weight = 0.0f;
+    
+    weight = sqrt(weights[0]*id + weights[1]*lecturer + weights[2]*tutor + weights[3]*elective);
+    
+    return weight;
+}
