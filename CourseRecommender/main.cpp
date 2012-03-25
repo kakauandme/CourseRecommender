@@ -54,18 +54,15 @@ vector<Student> readStudents(string path)
     vector<Student> students;    
     string line;
     
-    /*
-     char *curpath=NULL;
-     size_t size;
-     curpath=getcwd(curpath, size);
-     string longPath = string(curpath);
+    char *curpath=NULL;
+    size_t size;
+    curpath=getcwd(curpath, size);
+    string longPath = string(curpath);
      
-     longPath+="/";
-     longPath+=path;
+    longPath+="/";
+    longPath+=path;
      
-     cout<< longPath <<endl;
-     */
-    
+    cout<< longPath <<endl;
     
     ifstream myfile (path.c_str());
     if (myfile.is_open())
@@ -87,7 +84,6 @@ vector<Course> readCourses(string path)
     vector<Course> students;    
     string line;
     
-    /*
     char *curpath=NULL;
     size_t size;
     curpath=getcwd(curpath, size);
@@ -97,7 +93,6 @@ vector<Course> readCourses(string path)
     longPath+=path;
     
     cout<< longPath <<endl;
-    */
     
     
     ifstream myfile (path.c_str());
@@ -114,4 +109,3 @@ vector<Course> readCourses(string path)
     }
     return students;    
 }
-
