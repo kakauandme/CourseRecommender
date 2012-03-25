@@ -44,7 +44,10 @@ Course::Course(std::string record)
         
         for (int i =0; i<studentsCount; i++) {
             number = strtok (NULL, ",");
-            students[i] = atoi(number);
+            if(number)
+                students[i] = atoi(number);
+            else
+                students[i] = 0;
         }
     //}catch(){}
 }
