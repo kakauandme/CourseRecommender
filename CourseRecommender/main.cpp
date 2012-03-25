@@ -33,6 +33,7 @@ const float COURSEWEIGHTS[4] = {0.4,0.2,0.1,0.3};
 //with makeFromFromString(string) method
 vector<Student> readStudents(string);
 vector<Course> readCourses(string);
+void createNewStudent();
 
 typedef struct NewStudentType 
 {
@@ -158,4 +159,45 @@ vector<Course> readCourses(string path)
         myfile.close();
     }
     return students;    
+}
+
+
+void createNewStudent()
+{
+    bool u,f,l;
+    int gpa;
+    
+    cout << "Enter new student details \n";
+    cout << "Undergraduate:\t";
+    cin >> u;
+    cout << endl;
+    cout << "Female:\t";
+    cin >> f;
+    cout << endl;
+    cout << "Local:\t";
+    cin >> l;
+    cout << endl;
+    cout << "GPA:\t";
+    cin >>  gpa;
+    cout << endl << endl;
+    
+    Student newStudent = Student(0,u,f,l,gpa);
+    
+    int c,l,t;
+    bool e;
+    
+    cout << "Enter corses details\n";
+    
+    cout << "Course:\t";
+    cin >> c;
+    cout << endl;
+    cout << "Lecturer:\t";
+    cin >> l;
+    cout << endl;
+    cout << "Tutor:\t";
+    cin >> t;
+    cout << endl;
+    cout << "Elective\t";
+    cin >> e;   
+    
 }
