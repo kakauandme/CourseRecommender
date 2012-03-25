@@ -34,14 +34,9 @@ vector<Course> readCourses(string);
 int main (int argc, const char * argv[])
 {
     
-    vector<Student> students;// = readStudents("student.csv");
-    vector<Course> courses;// = readCourses("course.csv");
+    vector<Student> students = readStudents("student.csv");
+    vector<Course> courses = readCourses("course.csv");
 
-    FILE * f;
-    if((f = fopen("student.csv", "r"))){
-        students = readStudents_c(f);
-    }
-   
     // insert code here...
     cout << "Students count:\t"<< students.size() << endl;
     cout << "Courses count:\t" << courses.size() << endl;
@@ -53,7 +48,7 @@ vector<Student> readStudents(string path)
     
     vector<Student> students;    
     string line;
-    
+    /*
     char *curpath=NULL;
     size_t size;
     curpath=getcwd(curpath, size);
@@ -63,6 +58,7 @@ vector<Student> readStudents(string path)
     longPath+=path;
      
     cout<< longPath <<endl;
+    */
     
     ifstream myfile (path.c_str());
     if (myfile.is_open())
@@ -84,6 +80,7 @@ vector<Course> readCourses(string path)
     vector<Course> students;    
     string line;
     
+    /*
     char *curpath=NULL;
     size_t size;
     curpath=getcwd(curpath, size);
@@ -93,7 +90,7 @@ vector<Course> readCourses(string path)
     longPath+=path;
     
     cout<< longPath <<endl;
-    
+    */
     
     ifstream myfile (path.c_str());
     if (myfile.is_open())
