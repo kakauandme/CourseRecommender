@@ -43,8 +43,7 @@ Course::Course(std::string record)
         elective= atoi(number);
         
         for (int i =0; i<studentsCount; i++) {
-            number = strtok (NULL, ",");
-            if(number)
+            if((number = strtok (NULL, ",")))
                 students[i] = atoi(number);
             else
                 students[i] = 0;
