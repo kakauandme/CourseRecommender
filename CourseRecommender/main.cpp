@@ -21,6 +21,7 @@ using namespace std;
 #define stdcnt 10
 #define EXTRA_CHAR 1
 #define MAX_LINE_LENGTH 1024
+#define NUMBER_OF_COURSES 4
 
 //it is possible to write method,
 //but we have to make virtual class
@@ -29,18 +30,64 @@ vector<Student> readStudents_c(FILE *);
 vector<Student> readStudents(string);
 vector<Course> readCourses(string);
 
+typedef struct NewStudentType 
+{
+    Student studentInfo;
+    Course  courseInfo[NUMBER_OF_COURSES];
+} NewStudent;
 
+bool generateWekaFile(vector<Student>, vector<Course>);
 
 int main (int argc, const char * argv[])
 {
     
     vector<Student> students = readStudents("student.csv");
     vector<Course> courses = readCourses("course.csv");
-
+    NewStudent newStudent;
+    
     // insert code here...
     cout << "Students count:\t"<< students.size() << endl;
     cout << "Courses count:\t" << courses.size() << endl;
+    generateWekaFile(students, courses);
     return 0;
+}
+
+bool generateWekaFile(vector<Student> students, vector<Course> courses)
+{    
+
+    ofstream wekaFile;
+    wekaFile.open("data.arff");
+    
+    const string classes[] = {"unknown","very_bad", "bad", "satisfactory", "good", "excellent"};
+    
+    wekaFile << "@RELATION " << "STUDENT_RATE_FOR_COURSE\n\n";
+    // Student section
+    wekaFile << "@ATTRIBUTE " << "undergrad " << "{0,1}\n";
+    wekaFile << "@ATTRIBUTE " << "female " << "{0,1}\n";
+    wekaFile << "@ATTRIBUTE " << "local " << "{0,1}\n";
+    wekaFile << "@ATTRIBUTE " << "gpa " << "NUMERIC\n";
+
+    // Course section    course,lecturer,tutor,core
+    wekaFile << "@ATTRIBUTE " << "course " << "NUMERIC\n";
+    wekaFile << "@ATTRIBUTE " << "lecturer " << "NUMERIC\n";
+    wekaFile << "@ATTRIBUTE " << "tutor " << "NUMERIC\n";
+    wekaFile << "@ATTRIBUTE " << "core " << "{0,1}\n";
+    wekaFile << "@ATTRIBUTE " << "class " << "{unknown,very_bad,bad,satisfactory,good,excellent}" << "\n\n";
+    
+    wekaFile << "@DATA\n";
+    
+    for(int i=0; i<students.size(); i++)
+    {   
+        for (int j=0; j<courses.size(); j++)
+        {
+            wekaFile << students[i].Undergraduate() << "," << students[i].Female() << "," << students[i].Local() << "," << students[i].GPA() << ",";
+            wekaFile << courses[j].Id() << "," << courses[j].Lecturer() << "," << courses[j].Tutor() << "," << courses[j].Elective() << ",";
+            wekaFile << classes[courses[j].Students()[i]] << "\n";
+        }
+    }
+    
+    wekaFile.close();
+    return true;
 }
 
 vector<Student> readStudents(string path)

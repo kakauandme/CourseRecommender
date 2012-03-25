@@ -36,6 +36,7 @@
 		63BF6A9B150F5FDD00BA88BC /* Student.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Student.cpp; sourceTree = "<group>"; };
 		63BF6A9D150F647E00BA88BC /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Course.h; sourceTree = "<group>"; };
 		63BF6A9E150F649E00BA88BC /* Course.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Course.cpp; sourceTree = "<group>"; };
+		BBAFE988151F471800C748A7 /* data.arff */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = data.arff; path = CourseRecommender/data.arff; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +53,7 @@
 		632AB449150F166100123D50 = {
 			isa = PBXGroup;
 			children = (
+				BBAFE988151F471800C748A7 /* data.arff */,
 				633109461518AC4C0084882F /* course.csv */,
 				633109471518AC4C0084882F /* student.csv */,
 				632AB457150F166200123D50 /* CourseRecommender */,
