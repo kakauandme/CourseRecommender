@@ -63,23 +63,34 @@ int Student::GPA()
     return gpa;
 }
 
-float Student::norm(const float* weights) const{
-    float weight = 0.0f;
-    
-    weight = (weights[0]*undergraduate + weights[1]*female + weights[2]*local + weights[3]*gpa);
-    
-    return weight;
-}
 
-
-bool Student::operator<(const Student& a)
+////norm sucks
+//float Student::norm() const{
+//    
+//  return (STUDENTWEIGHTS[0]*undergraduate + STUDENTWEIGHTS[1]*female + STUDENTWEIGHTS[2]*local + STUDENTWEIGHTS[3]*gpa);
+//
+//}
+bool Student::compare(const Student& a)
 {
-    return norm(STUDENTWEIGHTS) < a.norm(STUDENTWEIGHTS);
+    float res = 0.0;
+    res += STUDENTWEIGHTS[0]*(undergraduate == a.undergraduate);
+    res += STUDENTWEIGHTS[1]*(female == a.female);
+    res += STUDENTWEIGHTS[2]*(local == a.local);
+    res+= STUDENTWEIGHTS[3]*((4 - abs(gpa-a.gpa))/4);
+    
+    return res >= STUDTRASHHOLD;
+    
 }
+
+
+//bool Student::operator<(const Student& a)
+//{
+//    return norm() < a.norm();
+//}
 
 
 std::ostream& operator<<(std::ostream& os, const Student& s)
 {
-    os << s.id<< '\t' << s.undergraduate << '\t' << s.female << '\t' << s.local << '\t' << s.gpa<< '\t' << s.norm(STUDENTWEIGHTS) << '\n';
+    os << s.id<< '\t' << s.undergraduate << '\t' << s.female << '\t' << s.local << '\t' << s.gpa<< '\t'  << '\n';
     return os;
 }

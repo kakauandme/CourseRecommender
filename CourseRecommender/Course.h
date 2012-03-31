@@ -12,12 +12,14 @@
 
 
 #endif
-
+#include <iostream>
 #include <string>
 #include <math.h>
 
 const unsigned studentsCount = 10;
 const float COURSEWEIGHTS[4] = {0.4,0.3,0.1,0.2};   //course,lecture,tuter,core
+const float CORSETRASHOLD = 0.5;
+
 class Course{
 private:
     
@@ -39,6 +41,8 @@ public:
     int Tutor();
     bool Elective();
     int* Students();
-    float norm(const float*);
-    bool operator<(Course&);
+    bool compare(const Course&);
+//    float norm() const;
+//    bool operator<(const Course&);
+    friend std::ostream& operator<<(std::ostream& os, const Course& s);
 };

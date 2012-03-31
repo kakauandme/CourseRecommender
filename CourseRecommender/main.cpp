@@ -38,11 +38,8 @@ typedef struct NewStudentType
 vector<Student> readStudents(string);
 vector<Course> readCourses(string);
 NewStudent createNewStudent();
-
-
-
 bool generateWekaFile(vector<Student>, vector<Course>);
-
+void print(vector<Student>,vector<Course>);
 
 
 int main (int argc, const char * argv[])
@@ -55,8 +52,11 @@ int main (int argc, const char * argv[])
     // insert code here...
     cout << "Students count:\t"<< students.size() << endl;
     cout << "Courses count:\t" << courses.size() << endl;
-    generateWekaFile(students, courses);
-    newStudent = createNewStudent();
+    //generateWekaFile(students, courses);
+    //newStudent = createNewStudent();
+    print(students,courses);
+    
+    
     return 0;
 }
 
@@ -206,4 +206,18 @@ NewStudent createNewStudent()
     cout << "end";
     return newStudent;
     
+}
+
+
+void print(vector<Student> students,vector<Course> courses)
+{
+    for(int i=0;i < students.size(); i++)
+    {
+        std::cout << students[i];
+        
+    }
+    
+    for (int i =0; i<courses.size(); i++) {
+        std::cout << courses[i];
+    }
 }
