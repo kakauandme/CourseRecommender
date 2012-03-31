@@ -40,6 +40,7 @@ Student::Student(std::string record)
         gpa = atof(number);  
     
     //}catch(){}
+    //
 }
 int Student::Id()
 {
