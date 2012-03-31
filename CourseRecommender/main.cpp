@@ -38,8 +38,10 @@ typedef struct NewStudentType
 vector<Student> readStudents(string);
 vector<Course> readCourses(string);
 NewStudent createNewStudent();
-bool generateWekaFile(vector<Student>, vector<Course>);
-void print(vector<Student>,vector<Course>);
+bool generateWekaFile(vector<Student>&, vector<Course>&);
+void print(vector<Student>&,vector<Course>&);
+vector<Student>* getSimailar(vector<Student>&, Student&);
+vector<Course>* getSimailar(vector<Course>&, Course&);
 
 
 int main (int argc, const char * argv[])
@@ -53,14 +55,22 @@ int main (int argc, const char * argv[])
     cout << "Students count:\t"<< students.size() << endl;
     cout << "Courses count:\t" << courses.size() << endl;
     //generateWekaFile(students, courses);
-    //newStudent = createNewStudent();
     print(students,courses);
+    newStudent = createNewStudent();
+    getSimailar(students, newStudent.studentInfo);
+//  getSimailar(courses, newStudent.);
+    
+    cout<<endl;
+
+
+    
+    
     
     
     return 0;
 }
 
-bool generateWekaFile(vector<Student> students, vector<Course> courses)
+bool generateWekaFile(vector<Student>& students, vector<Course>& courses)
 {    
 
     ofstream wekaFile;
@@ -168,56 +178,98 @@ NewStudent createNewStudent()
     NewStudent newStudent;
     bool u,f,l;
     int gpa;
-    
-    cout << "Enter new student details \n";
-    cout << "Undergraduate:\t";
-    cin >> u;
-    cout << "Female:\t";
-    cin >> f;
-    cout << "Local:\t";
-    cin >> l;
-    cout << "GPA:\t";
-    cin >>  gpa;
+    try {
+        cout << "\nEnter new student details \n";
+        cout << "Undergraduate:\t";
+        cin >> u;
+        cout << "Female:\t";
+        cin >> f;
+        cout << "Local:\t";
+        cin >> l;
+        cout << "GPA:\t";
+        cin >>  gpa;
+    } catch (exception c) {
+        cout << "Input Error" << endl;
+    }
+ 
     cout << endl << endl;
     
     newStudent.studentInfo=Student(0,u,f,l,gpa);
     
     int c,le,t;
     bool e;
-    for (int i=0; i<NUMBER_OF_COURSES; i++) {
+    
+    try{
+        for (int i=0; i<NUMBER_OF_COURSES; i++) {
+                
+//            
+//            cout << "Enter corses " << i+1 <<" details\n";
+//            
+//            cout << "Course:\t";
+//            cin >> c;
+//
+//            cout << "Lecturer:\t";
+//            cin >> le;
+//
+//            cout << "Tutor:\t";
+//            cin >> t;
+//
+//            cout << "Elective:\t";
+//            cin >> e; 
+//            newStudent.courseInfo[i] = Course(c,le,t,e);
+//            cout << endl << endl;
             
-        
-        cout << "Enter corses " << i+1 <<" details\n";
-        
-        cout << "Course:\t";
-        cin >> c;
+            //temporary
+            newStudent.courseInfo[i] = Course(0,0,0,0);
+           
+        }
+    }catch(exception c)
+    {
+        cout << "Input Error" << endl;
 
-        cout << "Lecturer:\t";
-        cin >> le;
-
-        cout << "Tutor:\t";
-        cin >> t;
-
-        cout << "Elective\t";
-        cin >> e; 
-        newStudent.courseInfo[i] = Course(c,le,t,e);
-        cout << endl << endl;
     }
-    cout << "end";
     return newStudent;
     
 }
 
 
-void print(vector<Student> students,vector<Course> courses)
+void print(vector<Student>& students,vector<Course>& courses)
 {
+    cout << "\nID\tU\tF\tL\tGPA\n";
+    cout << "-------------------\n";
     for(int i=0;i < students.size(); i++)
     {
         std::cout << students[i];
         
     }
     
+    cout << "\nID\tL\tT\tE\n";
+    cout << "-------------------\n";
+    
     for (int i =0; i<courses.size(); i++) {
         std::cout << courses[i];
     }
+}
+
+vector<Student>* getSimailar(vector<Student>& list, Student& s)
+{
+    vector<Student>* res = new vector<Student>();
+    for (int i=0; i<list.size(); i++) {
+        if(s.compare(list[i]))
+            res->push_back(list[i]);
+    }
+    
+    return res;
+    
+}
+
+vector<Course>* getSimailar(vector<Course>& list, Course& s)
+{
+    vector<Course>* res = new vector<Course>();
+    for (int i=0; i<list.size(); i++) {
+        if(s.compare(list[i]))
+            res->push_back(list[i]);
+    }    
+    return res;
+    
 }

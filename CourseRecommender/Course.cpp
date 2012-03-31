@@ -104,7 +104,7 @@ bool Course::compare(const Course& c){
     res+=COURSEWEIGHTS[1]*(lecturer == c.lecturer);
     res+=COURSEWEIGHTS[2]*(tutor == c.tutor);
     res+=COURSEWEIGHTS[3]*(elective == c.elective);
-    
+    std::cout << "Course " << id << " VS " << c.id << " |" << res<<'\n'; 
     return res >= CORSETRASHOLD;
 }
 

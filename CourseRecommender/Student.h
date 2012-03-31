@@ -13,11 +13,11 @@
 
 #endif
 
-#include <ostream>
+#include <iostream>
 #include <string>
 #include <math.h>
 
-const float STUDENTWEIGHTS[4] = {0.2,02,01,0.5};    // undergrad,gender,local,GPA
+const float STUDENTWEIGHTS[4] = {0.2,0.2,0.1,0.5};    // undergrad,gender,local,GPA
 const float STUDTRASHHOLD = 0.5;
 
 class Student{
