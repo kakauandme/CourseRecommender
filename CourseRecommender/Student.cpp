@@ -63,10 +63,23 @@ int Student::GPA()
     return gpa;
 }
 
-float Student::norm(float* weights){
+float Student::norm(const float* weights) const{
     float weight = 0.0f;
     
-    weight = sqrt(weights[0]*undergraduate + weights[1]*female + weights[2]*local + weights[3]*gpa);
+    weight = (weights[0]*undergraduate + weights[1]*female + weights[2]*local + weights[3]*gpa);
     
     return weight;
+}
+
+
+bool Student::operator<(const Student& a)
+{
+    return norm(STUDENTWEIGHTS) < a.norm(STUDENTWEIGHTS);
+}
+
+
+std::ostream& operator<<(std::ostream& os, const Student& s)
+{
+    os << s.id<< '\t' << s.undergraduate << '\t' << s.female << '\t' << s.local << '\t' << s.gpa<< '\t' << s.norm(STUDENTWEIGHTS) << '\n';
+    return os;
 }

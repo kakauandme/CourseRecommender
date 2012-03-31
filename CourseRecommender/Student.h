@@ -13,8 +13,11 @@
 
 #endif
 
+#include <ostream>
 #include <string>
 #include <math.h>
+
+const float STUDENTWEIGHTS[4] = {0.2,02,01,0.5};    // undergrad,gender,local,GPA
 
 class Student{
 private:
@@ -37,7 +40,10 @@ public:
     bool Female();
     bool Local();
     int GPA();
-    float norm(float*);
+    float norm(const float*) const;
+    bool operator<(const Student&) ;
+    friend std::ostream& operator<<(std::ostream& os, const Student& s);
+    
     
         
 };

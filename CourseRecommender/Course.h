@@ -17,7 +17,7 @@
 #include <math.h>
 
 const unsigned studentsCount = 10;
-
+const float COURSEWEIGHTS[4] = {0.4,0.3,0.1,0.2};   //course,lecture,tuter,core
 class Course{
 private:
     
@@ -39,6 +39,6 @@ public:
     int Tutor();
     bool Elective();
     int* Students();
-    float norm(float*);
-
+    float norm(const float*);
+    bool operator<(Course&);
 };

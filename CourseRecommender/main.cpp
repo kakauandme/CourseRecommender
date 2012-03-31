@@ -24,8 +24,8 @@ using namespace std;
 
 
 
-const float STUDENTWEIGHTS[4] = {0.2,02,01,0.5};
-const float COURSEWEIGHTS[4] = {0.4,0.2,0.1,0.3};
+
+
 typedef struct NewStudentType 
 {
     Student studentInfo;

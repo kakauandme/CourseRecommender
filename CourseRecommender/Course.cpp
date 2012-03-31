@@ -84,10 +84,17 @@ int* Course::Students()
 }
 
 
-float Course::norm(float* weights){
+float Course::norm(const float* weights){
     float weight = 0.0f;
     
-    weight = sqrt(weights[0]*id + weights[1]*lecturer + weights[2]*tutor + weights[3]*elective);
+    weight = weights[0]*id + weights[1]*lecturer + weights[2]*tutor + weights[3]*elective;
     
     return weight;
+}
+
+
+
+bool Course::operator<(Course& a) 
+{ 
+    return norm(COURSEWEIGHTS) < a.norm(COURSEWEIGHTS); 
 }
