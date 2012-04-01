@@ -37,11 +37,17 @@ typedef struct NewStudentType
 //with makeFromFromString(string) method
 vector<Student> readStudents(string);
 vector<Course> readCourses(string);
+
 NewStudent createNewStudent();
+
 bool generateWekaFile(vector<Student>&, vector<Course>&);
 void print(vector<Student>&,vector<Course>&);
-vector<Student>* getSimailar(vector<Student>&, Student&);
-vector<Course>* getSimailar(vector<Course>&, Course&);
+
+vector<Student>* getSimilarByStudent(vector<Student>&, Student&);
+vector<Course>* getSimilarByCourse(vector<Course>&, Course&);
+
+vector<Student>* getSimilarByCourses(vector<Student>&, vector<Course>&, NewStudent);
+int* getRecommendedCourses(vector<Student>&, vector<Course>&, NewStudent);
 
 
 int main (int argc, const char * argv[])
@@ -51,21 +57,18 @@ int main (int argc, const char * argv[])
     vector<Course> courses = readCourses("course.csv");
     NewStudent newStudent;
     
-    // insert code here...
     cout << "Students count:\t"<< students.size() << endl;
     cout << "Courses count:\t" << courses.size() << endl;
+    
+    
     //generateWekaFile(students, courses);
+    
     print(students,courses);
     newStudent = createNewStudent();
-    getSimailar(students, newStudent.studentInfo);
-//  getSimailar(courses, newStudent.);
+    getSimilarByStudent(students, newStudent.studentInfo);
+//  getSimilarByCourse(courses, newStudent.);
     
     cout<<endl;
-
-
-    
-    
-    
     
     return 0;
 }
@@ -196,7 +199,7 @@ NewStudent createNewStudent()
     
     newStudent.studentInfo=Student(0,u,f,l,gpa);
     
-    int c,le,t;
+    int c,le,t,r;
     bool e;
     
     try{
@@ -214,13 +217,15 @@ NewStudent createNewStudent()
 //            cout << "Tutor:\t";
 //            cin >> t;
 //
-//            cout << "Elective:\t";
+//            cout << "Elective (1/0):\t";
 //            cin >> e; 
-//            newStudent.courseInfo[i] = Course(c,le,t,e);
+//            cout << "Rating (1-5):\t";
+//            cin >> r;             
+//            newStudent.courseInfo[i] = Course(c,le,t,e,r);
 //            cout << endl << endl;
             
             //temporary
-            newStudent.courseInfo[i] = Course(0,0,0,0);
+            newStudent.courseInfo[i] = Course(0,0,0,0,0);
            
         }
     }catch(exception c)
@@ -251,7 +256,7 @@ void print(vector<Student>& students,vector<Course>& courses)
     }
 }
 
-vector<Student>* getSimailar(vector<Student>& list, Student& s)
+vector<Student>* getSimilarByStudent(vector<Student>& list, Student& s)
 {
     vector<Student>* res = new vector<Student>();
     for (int i=0; i<list.size(); i++) {
@@ -263,7 +268,7 @@ vector<Student>* getSimailar(vector<Student>& list, Student& s)
     
 }
 
-vector<Course>* getSimailar(vector<Course>& list, Course& s)
+vector<Course>* getSimilarByCourse(vector<Course>& list, Course& s)
 {
     vector<Course>* res = new vector<Course>();
     for (int i=0; i<list.size(); i++) {
@@ -272,4 +277,17 @@ vector<Course>* getSimailar(vector<Course>& list, Course& s)
     }    
     return res;
     
+}
+
+vector<Student>* getSimilarByCourses(vector<Student>& students, vector<Course>& courses, NewStudent newStudent)
+{
+    vector<Student> *res = new vector<Student>();
+    for(int i=0; i<courses.size(); i++) {
+        for (k=0; k<students.size(); k++)
+            for (int j=0; j<NUMBER_OF_COURSES; j++) {    
+                if (newStudent.courseInfo[j].compare(courses[i], students[k].Id())
+                    res->push_back(students[k]);
+            }
+    }
+    return res;
 }
