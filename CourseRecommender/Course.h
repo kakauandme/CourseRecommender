@@ -33,7 +33,7 @@ public:
     
     Course();
     Course(int,int,int,bool, int*);
-    Course(int,int,int,bool);
+    Course(int,int,int,bool,int);
     Course(std::string);
     
     int Id();
