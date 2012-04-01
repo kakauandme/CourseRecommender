@@ -321,9 +321,10 @@ bool compareCoursesToRecommend(const float& s1, const float& s2)
 int* getRecomendedCourses(vector<Student>& students, vector<Course>& courses, NewStudent& s)
 {
     int maxCourse = getMaxCourse(s);
-    map <int,float>  coursesToRecommend;
+    float   coursesToRecommend[2][STD_CNT];
     int ratingSum;
     int coursesCount;
+    int recommendedCnt = 0;
     bool unique = false;
     for(int j=0; j<courses.size();j++){
         unique = true;
@@ -346,17 +347,32 @@ int* getRecomendedCourses(vector<Student>& students, vector<Course>& courses, Ne
             }
         }
         if(ratingSum/coursesCount >= 3.0)
-            coursesToRecommend.insert(pair<int,float>(j,ratingSum/coursesCount));
+            coursesToRecommend[0][recommendedCnt] = j;
+            coursesToRecommend[1][recommendedCnt] = ratingSum/coursesCount;
     }
-    std::sort(coursesToRecommend.begin(),coursesToRecommend.end(),compareCoursesToRecommend); 
+   
+    bool sorted = false;
+    while (sorted) {
+        sorted = true;
+        for (int i =0; i< recommendedCnt-1; i++) {
+            
+            if (coursesToRecommend[1][i] < coursesToRecommend[1][i+1]) {
+                float tmp = coursesToRecommend[1][i];
+                coursesToRecommend[1][i] = coursesToRecommend[1][i+1];
+                coursesToRecommend[1][i+1] = tmp;
+                
+                tmp = coursesToRecommend[0][i];
+                coursesToRecommend[0][i] = coursesToRecommend[0][i+1];
+                coursesToRecommend[0][i+1] = tmp;
+                sorted = false;              
+                
+            }
+        }
+    }
     int* res = new int[3];
-    int cnt = 0;
-    for(map<int,float>::iterator it = coursesToRecommend.begin(); it != coursesToRecommend.end(); ++it) {
+    for( int i=0;i<3;i++) {
+        res[i] = (int)coursesToRecommend[0][i];
         
-        res[cnt] = it->first;
-        if(++cnt >= 3)
-            break;
-    
     }
     
     return res;
