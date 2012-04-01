@@ -205,7 +205,6 @@ NewStudent createNewStudent()
     try{
         for (int i=0; i<NUMBER_OF_COURSES; i++) {
                 
-//            
 //            cout << "Enter corses " << i+1 <<" details\n";
 //            
 //            cout << "Course:\t";
@@ -265,27 +264,15 @@ vector<Student>* getSimilarByStudent(vector<Student>& list, Student& s)
     }
     
     return res;
-    
-}
-
-vector<Course>* getSimilarByCourse(vector<Course>& list, Course& s)
-{
-    vector<Course>* res = new vector<Course>();
-    for (int i=0; i<list.size(); i++) {
-        if(s.compare(list[i]))
-            res->push_back(list[i]);
-    }    
-    return res;
-    
 }
 
 vector<Student>* getSimilarByCourses(vector<Student>& students, vector<Course>& courses, NewStudent newStudent)
 {
     vector<Student> *res = new vector<Student>();
     for(int i=0; i<courses.size(); i++) {
-        for (k=0; k<students.size(); k++)
+        for (int k=0; k<students.size(); k++)
             for (int j=0; j<NUMBER_OF_COURSES; j++) {    
-                if (newStudent.courseInfo[j].compare(courses[i], students[k].Id())
+                if (newStudent.courseInfo[j].compare(courses[i], students[k].Id()))
                     res->push_back(students[k]);
             }
     }

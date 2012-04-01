@@ -78,12 +78,7 @@ bool Student::compare(const Student& a)
     res += STUDENTWEIGHTS[2]*(local == a.local);
     res += STUDENTWEIGHTS[3]*((4 - abs(gpa-a.gpa))/4);
     std::cout << "Student " << id << " VS " << a.id << "\t|" << res<< '\n'; 
-<<<<<<< HEAD
-    return res >= STUDTRASHHOLD;
-=======
     return res > STUDTRASHHOLD;
-    
->>>>>>> d55175f6caf26d818f31e6975cb2de59e03e815f
 }
 
 
