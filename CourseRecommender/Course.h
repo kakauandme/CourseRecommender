@@ -42,7 +42,5 @@ public:
     bool Elective();
     int* Students();
     bool compare(const Course&,int);
-//    float norm() const;
-//    bool operator<(const Course&);
     friend std::ostream& operator<<(std::ostream& os, const Course& s);
 };

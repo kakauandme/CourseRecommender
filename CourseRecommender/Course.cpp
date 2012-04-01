@@ -88,13 +88,10 @@ int* Course::Students()
 //
 //}
 
-
-
 //bool Course::operator<(const Course& a) 
 //{ 
 //    return norm() < a.norm(); 
 //}
-
 
 bool Course::compare(const Course& c,int student){
     float res = 0.0;
