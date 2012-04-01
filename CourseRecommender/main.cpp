@@ -258,7 +258,7 @@ void print(vector<Student>& students,vector<Course>& courses)
     }
     
     cout << "\nID\tL\tT\tE\tS1\tS2\tS3\tS4\tS5\tS6\tS7\tS8\tS9\tS10\n";
-    cout << "-------------------\n";
+    cout << "-------------------------------------------------------\n";
     
     for (int i =0; i<courses.size(); i++) {
         std::cout << courses[i];
