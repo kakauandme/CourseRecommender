@@ -257,7 +257,7 @@ void print(vector<Student>& students,vector<Course>& courses)
         
     }
     
-    cout << "\nID\tL\tT\tE\n";
+    cout << "\nID\tL\tT\tE\tS1\tS2\tS3\tS4\tS5\tS6\tS7\tS8\tS9\tS10\n";
     cout << "-------------------\n";
     
     for (int i =0; i<courses.size(); i++) {
@@ -321,11 +321,7 @@ bool compareCoursesToRecommend(const float& s1, const float& s2)
 int* getRecomendedCourses(vector<Student>& students, vector<Course>& courses, NewStudent& s)
 {
     int maxCourse = getMaxCourse(s);
-<<<<<<< HEAD
     float   coursesToRecommend[2][STD_CNT];
-=======
-    float[STD_CNT][STD_CNT] coursesToRecommend;
->>>>>>> Minor stuff
     int ratingSum;
     int coursesCount;
     int recommendedCnt = 0;
@@ -351,7 +347,6 @@ int* getRecomendedCourses(vector<Student>& students, vector<Course>& courses, Ne
             }
         }
         if(ratingSum/coursesCount >= 3.0)
-<<<<<<< HEAD
             coursesToRecommend[0][recommendedCnt] = j;
             coursesToRecommend[1][recommendedCnt] = ratingSum/coursesCount;
     }
@@ -373,23 +368,13 @@ int* getRecomendedCourses(vector<Student>& students, vector<Course>& courses, Ne
                 
             }
         }
-=======
-            coursesToRecommend[j] = ratingSum/coursesCount;
->>>>>>> Minor stuff
     }
     int* res = new int[3];
-<<<<<<< HEAD
-    for( int i=0;i<3;i++) {
+
+    for( int i=0;i<3;i++)
         res[i] = (int)coursesToRecommend[0][i];
-        
-=======
-    for(int i=0; i<3; i++) {
-        res[i] = coursesToRecommend[i];
->>>>>>> Minor stuff
-    }
     
     return res;
-    
 }
 
             
