@@ -17,8 +17,8 @@
 #include <math.h>
 
 const unsigned studentsCount = 10;
-const float COURSEWEIGHTS[4] = {0.4,0.3,0.1,0.2};   //course,lecture,tuter,core
-const float CORSETRASHOLD = 0.5;
+const float COURSEWEIGHTS[5] = {0.3,0.2,0.05,0.05,0.4};   //course,lecture,tuter,core,rating
+const float CORSETRASHOLD = 0.7;
 
 class Course{
 private:
@@ -41,7 +41,7 @@ public:
     int Tutor();
     bool Elective();
     int* Students();
-    bool compare(const Course&);
+    bool compare(const Course&,int);
 //    float norm() const;
 //    bool operator<(const Course&);
     friend std::ostream& operator<<(std::ostream& os, const Course& s);

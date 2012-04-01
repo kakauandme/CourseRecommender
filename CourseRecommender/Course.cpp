@@ -98,14 +98,15 @@ int* Course::Students()
 //}
 
 
-bool Course::compare(const Course& c){
+bool Course::compare(const Course& c,int student){
     float res = 0.0;
     res+=COURSEWEIGHTS[0]*(id == c.id);
     res+=COURSEWEIGHTS[1]*(lecturer == c.lecturer);
     res+=COURSEWEIGHTS[2]*(tutor == c.tutor);
     res+=COURSEWEIGHTS[3]*(elective == c.elective);
+    res+=COURSEWEIGHTS[4]*(5-abs(students[0] - c.students[student]))/5;
     std::cout << "Course " << id << " VS " << c.id << " |" << res<<'\n'; 
-    return res >= CORSETRASHOLD;
+    return res > CORSETRASHOLD;
 }
 
 std::ostream& operator<<(std::ostream& os, const Course& s)
