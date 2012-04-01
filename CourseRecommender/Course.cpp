@@ -106,6 +106,10 @@ bool Course::compare(const Course& c,int student){
 
 std::ostream& operator<<(std::ostream& os, const Course& s)
 {
-    os << s.id<< '\t' << s.lecturer  << '\t' << s.tutor << '\t' << s.elective << '\t'  << '\n';
+    os << s.id<< '\t' << s.lecturer  << '\t' << s.tutor << '\t' << s.elective << '\t';
+    
+    for(int i=0; i< 10;i++)
+        os<< s.students[i] << '\t';
+    os    << '\n';
     return os;
 }
