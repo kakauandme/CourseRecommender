@@ -9,6 +9,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <map>
 #include <string>
 #include <unistd.h>
 #include <stdio.h>
@@ -42,6 +43,15 @@ bool generateWekaFile(vector<Student>&, vector<Course>&);
 void print(vector<Student>&,vector<Course>&);
 vector<Student>* getSimailar(vector<Student>&, Student&);
 vector<Course>* getSimailar(vector<Course>&, Course&);
+
+
+
+
+
+
+int getMaxCourse(NewStudent&);
+int* getRecomendedCourses(vector<Student>&, vector<Course>&,  NewStudent&);
+bool compareCoursesToRecommend(const float&, const float&);
 
 
 int main (int argc, const char * argv[])
@@ -273,3 +283,78 @@ vector<Course>* getSimailar(vector<Course>& list, Course& s)
     return res;
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+int getMaxCourse(NewStudent& s){
+    int res = 0;
+    
+    for (int i=0; i<NUMBER_OF_COURSES; i++)
+        if (s.courseInfo[i].Students()[0] > res)
+            res= s.courseInfo[i].Students()[0];
+        
+    return res;
+}
+
+
+bool compareCoursesToRecommend(const float& s1, const float& s2)
+{
+    return    s1<s2;
+}
+
+
+int* getRecomendedCourses(vector<Student>& students, vector<Course>& courses, NewStudent& s)
+{
+    int maxCourse = getMaxCourse(s);
+    map <int,float>  coursesToRecommend;
+    int ratingSum;
+    int coursesCount;
+    bool unique = false;
+    for(int j=0; j<courses.size();j++){
+        unique = true;
+        for(int k = 0; k< NUMBER_OF_COURSES; k++){
+            if(courses[j].Id() == s.courseInfo[k].Id() ){
+                unique = false;
+                break;
+            }
+                
+        }
+        if (courses[j].Id() <= maxCourse) {
+            continue;                
+        }  
+        ratingSum = 0;
+        coursesCount=0;
+        for(int i =0; i< students.size(); i ++){
+            if(courses[j].Students()[i]){
+                ratingSum+=courses[j].Students()[i];
+                coursesCount++;
+            }
+        }
+        if(ratingSum/coursesCount >= 3.0)
+            coursesToRecommend.insert(pair<int,float>(j,ratingSum/coursesCount));
+    }
+    std::sort(coursesToRecommend.begin(),coursesToRecommend.end(),compareCoursesToRecommend); 
+    int* res = new int[3];
+    int cnt = 0;
+    for(map<int,float>::iterator it = coursesToRecommend.begin(); it != coursesToRecommend.end(); ++it) {
+        
+        res[cnt] = it->first;
+        if(++cnt >= 3)
+            break;
+    
+    }
+    
+    return res;
+    
+}
+
+            
