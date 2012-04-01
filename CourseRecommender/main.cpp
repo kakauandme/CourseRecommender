@@ -45,7 +45,6 @@ bool generateWekaFile(vector<Student>&, vector<Course>&);
 void print(vector<Student>&,vector<Course>&);
 
 vector<Student>* getSimilarByStudent(vector<Student>&, Student&);
-vector<Course>* getSimilarByCourse(vector<Course>&, Course&);
 
 vector<Student>* getSimilarByCourses(vector<Student>&, vector<Course>&, NewStudent);
 int* getRecommendedCourses(vector<Student>&, vector<Course>&, NewStudent);
@@ -75,9 +74,12 @@ int main (int argc, const char * argv[])
     
     print(students,courses);
     newStudent = createNewStudent();
-    getSimilarByStudent(students, newStudent.studentInfo);
-//  getSimilarByCourse(courses, newStudent.);
+   vector<Student>* sStudents =  getSimilarByStudent(students, newStudent.studentInfo);
+    vector<Student>* cStudents = getSimilarByCourses(*sStudents, courses, newStudent);
+    int* res = getRecomendedCourses(*cStudents, courses, newStudent);
     
+    
+    cout << res[0] <<"\t"<<res[1]<<"\t"<<res[2]<<endl;
     cout<<endl;
     
     return 0;
@@ -215,26 +217,26 @@ NewStudent createNewStudent()
     try{
         for (int i=0; i<NUMBER_OF_COURSES; i++) {
                 
-//            cout << "Enter corses " << i+1 <<" details\n";
-//            
-//            cout << "Course:\t";
-//            cin >> c;
-//
-//            cout << "Lecturer:\t";
-//            cin >> le;
-//
-//            cout << "Tutor:\t";
-//            cin >> t;
-//
-//            cout << "Elective (1/0):\t";
-//            cin >> e; 
-//            cout << "Rating (1-5):\t";
-//            cin >> r;             
-//            newStudent.courseInfo[i] = Course(c,le,t,e,r);
-//            cout << endl << endl;
+            cout << "Enter corses " << i+1 <<" details\n";
+            
+            cout << "Course:\t";
+            cin >> c;
+
+            cout << "Lecturer:\t";
+            cin >> le;
+
+            cout << "Tutor:\t";
+            cin >> t;
+
+            cout << "Elective (1/0):\t";
+            cin >> e; 
+            cout << "Rating (1-5):\t";
+            cin >> r;             
+            newStudent.courseInfo[i] = Course(c,le,t,e,r);
+            cout << endl << endl;
             
             //temporary
-            newStudent.courseInfo[i] = Course(0,0,0,0,0);
+//            newStudent.courseInfo[i] = Course(0,0,0,0,0);
            
         }
     }catch(exception c)
@@ -282,12 +284,20 @@ vector<Student>* getSimilarByCourses(vector<Student>& students, vector<Course>& 
     for(int i=0; i<courses.size(); i++) {
         for (int k=0; k<students.size(); k++)
             for (int j=0; j<NUMBER_OF_COURSES; j++) {    
-                if (newStudent.courseInfo[j].compare(courses[i], students[k].Id()))
-                    res->push_back(students[k]);
+                if (newStudent.courseInfo[j].compare(courses[i], students[k].Id())){
+                    bool flag = true;
+                    for (int f=0; f<res->size(); f++) {
+                        if (res->at(i).Id() == students[k].Id()){
+                            flag = false;
+                            break;
+                        }
+                    }
+                    if (flag) res->push_back(students[k]);
+                }
             }
     }
+    cout << "\nAlike students: " << res->size();
     return res;
-    
 }
 
 
@@ -322,7 +332,7 @@ int* getRecomendedCourses(vector<Student>& students, vector<Course>& courses, Ne
 {
     int maxCourse = getMaxCourse(s);
     float   coursesToRecommend[2][STD_CNT];
-    int ratingSum;
+    float ratingSum;
     int coursesCount;
     int recommendedCnt = 0;
     bool unique = false;
@@ -341,14 +351,15 @@ int* getRecomendedCourses(vector<Student>& students, vector<Course>& courses, Ne
         ratingSum = 0;
         coursesCount=0;
         for(int i =0; i< students.size(); i ++){
-            if(courses[j].Students()[i]){
+            if(courses[j].Students()[students[i].Id()]){
                 ratingSum+=courses[j].Students()[i];
                 coursesCount++;
             }
         }
         if(ratingSum/coursesCount >= 3.0)
-            coursesToRecommend[0][recommendedCnt] = j;
+            coursesToRecommend[0][recommendedCnt] = courses[j].Id();
             coursesToRecommend[1][recommendedCnt] = ratingSum/coursesCount;
+        cout << "Course " << j << "AVG=" << ratingSum/coursesCount << endl;
     }
    
     bool sorted = false;
