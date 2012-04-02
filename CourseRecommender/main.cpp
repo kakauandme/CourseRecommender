@@ -9,7 +9,6 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <map>
 #include <string>
 #include <unistd.h>
 #include <stdio.h>
@@ -34,18 +33,13 @@ typedef struct NewStudentType
 //with makeFromFromString(string) method
 vector<Student> readStudents(string);
 vector<Course> readCourses(string);
-
 NewStudent createNewStudent();
-
 bool generateWekaFile(vector<Student>&, vector<Course>&);
 void print(vector<Student>&);
 void print(vector<Course>&);
-
 vector<Student>* getSimilarByStudent(vector<Student>&, Student&);
-
 vector<Student>* getSimilarByCourses(vector<Student>&, vector<Course>&, NewStudent);
 vector<Course>* getRecomendedCourses(vector<Student>&, vector<Course>&, NewStudent&);
-
 int getMaxCourse(NewStudent&);
 
 
@@ -74,10 +68,10 @@ int main (int argc, const char * argv[])
     print(*sStudents);
     
     
-  //  vector<Student>* cStudents = getSimilarByCourses(*sStudents, courses, newStudent);
-//    int* res = getRecomendedCourses(*cStudents, courses, newStudent);
-    
-    vector<Course>* resCourses =  getRecomendedCourses(students, courses, newStudent);
+    vector<Student>* cStudents = getSimilarByCourses(*sStudents, courses, newStudent);
+    cout << "\n Students by courses" << endl;
+    print(*cStudents);
+    vector<Course>* resCourses =  getRecomendedCourses(*cStudents, courses, newStudent);
     cout << "\n Recomended Courses" << endl;
     print(*resCourses);
 //    
@@ -262,19 +256,26 @@ vector<Student>* getSimilarByCourses(vector<Student>& students, vector<Course>& 
 {
     vector<Student> *res = new vector<Student>();
     for(int i=0; i<courses.size(); i++) {
-        for (int k=0; k<students.size(); k++)
-            for (int j=0; j<NUMBER_OF_COURSES; j++) {    
-                if (newStudent.courseInfo[j].compare(courses[i], students[k].Id())){
-                    bool flag = true;
-                    for (int f=0; f<res->size(); f++) {
-                        if (res->at(i).Id() == students[k].Id()){
-                            flag = false;
-                            break;
+        for (int j=0; j<NUMBER_OF_COURSES; j++){
+            if(newStudent.courseInfo[j].Id() !=  courses[i].Id())
+                continue;
+            
+            for (int k=0; k<students.size(); k++){
+                if (!courses[i].Students()[students[k].Id()-1])
+                    continue;
+            
+                if (newStudent.courseInfo[j].compare(courses[i], students[k].Id()-1)){
+                       bool flag = true;
+                        for (int f=0; f<res->size(); f++) {
+                            if (res->at(f).Id() == students[k].Id()){
+                                flag = false;
+                                break;
+                            }
                         }
-                    }
-                    if (flag) res->push_back(students[k]);
+                        if (flag) res->push_back(students[k]);
                 }
             }
+        }
     }
     cout << "\nAlike students: " << res->size();
     return res;

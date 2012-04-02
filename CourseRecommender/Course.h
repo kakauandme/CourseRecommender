@@ -17,7 +17,7 @@
 #include <math.h>
 
 const unsigned studentsCount = 10;
-const float COURSEWEIGHTS[5] = {0.3,0.2,0.05,0.05,0.4};   //course,lecture,tuter,core,rating
+const float COURSEWEIGHTS[5] = {0.2,0.1,0.1,0.6};   //course,lecture,tuter,core,rating
 const float CORSETRASHOLD = 0.7;
 
 class Course{

@@ -87,12 +87,11 @@ bool Course::compare(const Course& c,int student){
         return false;
     
     float res = 0.0;
-    res+=COURSEWEIGHTS[0]*(id == c.id);
-    res+=COURSEWEIGHTS[1]*(lecturer == c.lecturer);
-    res+=COURSEWEIGHTS[2]*(tutor == c.tutor);
-    res+=COURSEWEIGHTS[3]*(elective == c.elective);
-    res+=COURSEWEIGHTS[4]*(5-abs(students[0] - c.students[student]))/5;
-    std::cout << "Course " << id << "of S0 VS Course " << c.id << " of S" << student<< " |" << res<<'\n'; 
+    res+=COURSEWEIGHTS[0]*(lecturer == c.lecturer);
+    res+=COURSEWEIGHTS[1]*(tutor == c.tutor);
+    res+=COURSEWEIGHTS[2]*(elective == c.elective);
+    res+=COURSEWEIGHTS[3]*(4-abs(students[0] - c.students[student]))/4;
+    std::cout << "Course " << id << " of S0 VS Course " << c.id << " of S" << student+1<< " |" << res<<'\n'; 
     return res > CORSETRASHOLD;
 }
 
