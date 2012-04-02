@@ -62,14 +62,6 @@ int Student::GPA()
 {
     return gpa;
 }
-
-
-////norm sucks
-//float Student::norm() const{
-//    
-//  return (STUDENTWEIGHTS[0]*undergraduate + STUDENTWEIGHTS[1]*female + STUDENTWEIGHTS[2]*local + STUDENTWEIGHTS[3]*gpa);
-//
-//}
 bool Student::compare(const Student& a)
 {
     float res = 0.0;
@@ -80,13 +72,6 @@ bool Student::compare(const Student& a)
     std::cout << "Student " << id << " VS " << a.id << "\t|" << res<< '\n'; 
     return res > STUDTRASHHOLD;
 }
-
-
-//bool Student::operator<(const Student& a)
-//{
-//    return norm() < a.norm();
-//}
-
 
 std::ostream& operator<<(std::ostream& os, const Student& s)
 {

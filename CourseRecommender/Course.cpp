@@ -81,26 +81,18 @@ int* Course::Students()
     return students;
 }
 
-//norm sucks
-
-//float Course::norm() const{
-//   return COURSEWEIGHTS[0]*id + COURSEWEIGHTS[1]*lecturer + COURSEWEIGHTS[2]*tutor + COURSEWEIGHTS[3]*elective;
-//
-//}
-
-//bool Course::operator<(const Course& a) 
-//{ 
-//    return norm() < a.norm(); 
-//}
-
 bool Course::compare(const Course& c,int student){
+    
+    if(!c.students[student])
+        return false;
+    
     float res = 0.0;
     res+=COURSEWEIGHTS[0]*(id == c.id);
     res+=COURSEWEIGHTS[1]*(lecturer == c.lecturer);
     res+=COURSEWEIGHTS[2]*(tutor == c.tutor);
     res+=COURSEWEIGHTS[3]*(elective == c.elective);
     res+=COURSEWEIGHTS[4]*(5-abs(students[0] - c.students[student]))/5;
-    std::cout << "Course " << id << " VS " << c.id << " |" << res<<'\n'; 
+    std::cout << "Course " << id << "of S0 VS Course " << c.id << " of S" << student<< " |" << res<<'\n'; 
     return res > CORSETRASHOLD;
 }
 

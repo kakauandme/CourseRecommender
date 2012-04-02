@@ -41,9 +41,7 @@ public:
     bool Female();
     bool Local();
     int GPA();
-//    float norm() const;
     bool compare(const Student&);
-//    bool operator<(const Student&) ;
     friend std::ostream& operator<<(std::ostream& os, const Student& s);
     
     
