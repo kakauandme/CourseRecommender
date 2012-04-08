@@ -1,11 +1,3 @@
-//
-//  main.cpp
-//  CourseRecommender
-//
-//  Created by Kirill Kliavin on 13/03/12.
-//  Copyright (c) 2012 RMIT. All rights reserved.
-//
-
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -14,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Required Libs
+// Required Headers
 #include "Student.h"
 #include "Course.h"
 
