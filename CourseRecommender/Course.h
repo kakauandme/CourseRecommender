@@ -1,33 +1,33 @@
-//
-//  Course.h
-//  CourseRecommender
-//
-//  Created by Kirill Kliavin on 13/03/12.
-//  Copyright (c) 2012 RMIT. All rights reserved.
-//
-
 #ifndef CourseRecommender_Course_h
 #define CourseRecommender_Course_h
 
-
-
-#endif
 #include <iostream>
 #include <string>
 #include <math.h>
 
-const unsigned studentsCount = 10;
-const float COURSEWEIGHTS[5] = {0.2,0.1,0.1,0.6};   //course,lecture,tuter,core,rating
-const float CORSETRASHOLD = 0.7;
+#define W_COURSE 0.2
+#define W_LECTURER 0.1
+#define W_TUTOR 0.1
+#define W_RATING 0.6
+#define W_CORE 0 // need to define?
 
-class Course{
+#define COURSE_THRESHOLD 0.7
+
+#ifndef STD_CNT
+#define STD_CNT 10
+#endif
+
+/* Course, Lecturer, Tutor, Core, Rating */
+const float COURSEWEIGHTS[5] = {W_COURSE,W_LECTURER,W_TUTOR,W_RATING};
+
+class Course {
 private:
     
     int id;
     int lecturer;
     int tutor;
     bool elective;
-    int students[studentsCount];
+    int students[STD_CNT];
     
 public:
     
@@ -44,3 +44,5 @@ public:
     bool compare(const Course&,int);
     friend std::ostream& operator<<(std::ostream& os, const Course& s);
 };
+
+#endif

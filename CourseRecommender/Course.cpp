@@ -1,30 +1,24 @@
-//
-//  Course.cpp
-//  CourseRecommender
-//
-//  Created by Kirill Kliavin on 13/03/12.
-//  Copyright (c) 2012 RMIT. All rights reserved.
-//
-
 #include "Course.h"
 
-
+// Constructors
 Course::Course()
 {
     id=lecturer=tutor=elective=0;
-    for (int i=0; i<studentsCount; i++)
+    for (int i=0; i<STD_CNT; i++)
         students[i]=0;
 }
+
 Course::Course(int id, int lecturer, int tutor, bool elective, int* students)
 {
     this->id = id;
     this->lecturer = lecturer;
     this->tutor = tutor;
     this->elective = elective; 
-    for (int i=0; i<studentsCount; i++)
+    for (int i=0; i<STD_CNT; i++)
         this->students[i] = students[i];
     
 }
+
 Course::Course(int id, int lecturer, int tutor, bool elective, int rating)
 {
     this->id = id;
@@ -33,12 +27,9 @@ Course::Course(int id, int lecturer, int tutor, bool elective, int rating)
     this->elective = elective; 
     this->students[0] = rating;
 }
+
 Course::Course(std::string record)
 {
-    
-    //try{
-    
-    //string->char* !magic!
     const char* number = std::strtok (const_cast<char*>(record.c_str()),",");
     id = atoi(number);
     
@@ -51,15 +42,15 @@ Course::Course(std::string record)
     number = strtok (NULL, ",");
     elective= atoi(number);
     
-    for (int i =0; i<studentsCount; i++) {
+    for (int i =0; i<STD_CNT; i++) {
         if((number = strtok (NULL, ",")))
             students[i] = atoi(number);
         else
             students[i] = 0;
     }
-    //}catch(){}
 }
 
+// Accessors
 int Course::Id()
 {
     return id;
@@ -92,15 +83,14 @@ bool Course::compare(const Course& c,int student){
     res+=COURSEWEIGHTS[2]*(elective == c.elective);
     res+=COURSEWEIGHTS[3]*(4-abs(students[0] - c.students[student]))/4;
     std::cout << "Course " << id << " of S0 VS Course " << c.id << " of S" << student+1<< " |" << res<<'\n'; 
-    return res > CORSETRASHOLD;
+    return res > COURSE_THRESHOLD;
 }
 
 std::ostream& operator<<(std::ostream& os, const Course& s)
 {
-    os << s.id<< '\t' << s.lecturer  << '\t' << s.tutor << '\t' << s.elective << '\t';
-    
-    for(int i=0; i< 10;i++)
-        os<< s.students[i] << '\t';
-    os    << '\n';
+    os << s.id << '\t' << s.lecturer  << '\t' << s.tutor << '\t' << s.elective << '\t';
+    for(int i=0; i<STD_CNT;i++)
+        os << s.students[i] << '\t';
+    os << '\n';
     return os;
 }

@@ -1,16 +1,11 @@
-//
-//  Student.cpp
-//  CourseRecommender
-//
-//  Created by Kirill Kliavin on 13/03/12.
-//  Copyright (c) 2012 RMIT. All rights reserved.
-//
 #include "Student.h"
 
+// Constructors
 Student::Student()
 {
     id=undergraduate=female=local=gpa=0;
 }
+
 Student::Student(int id, bool undergraduate, bool female, bool local, int gpa)
 {
     this->id = id;
@@ -19,11 +14,9 @@ Student::Student(int id, bool undergraduate, bool female, bool local, int gpa)
     this->local = local;
     this->gpa = gpa;
 }
+
 Student::Student(std::string record)
 {
-    //try{
-    
-    //string->char* !magic!
     const char* number = std::strtok (const_cast<char*>(record.c_str()),",");
     id = atoi(number);
     
@@ -38,10 +31,9 @@ Student::Student(std::string record)
     
     number = strtok (NULL, ",");
     gpa = atof(number);  
-    
-    //}catch(){}
-    //
 }
+
+// Accessors
 int Student::Id()
 {
     return id;
@@ -62,6 +54,8 @@ int Student::GPA()
 {
     return gpa;
 }
+
+/* Compare two students (depends on student threshold factor) */
 bool Student::compare(const Student& a)
 {
     float res = 0.0;
@@ -70,7 +64,7 @@ bool Student::compare(const Student& a)
     res += STUDENTWEIGHTS[2]*(local == a.local);
     res += STUDENTWEIGHTS[3]*((3 - abs(gpa-a.gpa))/3);
     std::cout << "Student " << id << " VS " << a.id << "\t|" << res<< '\n'; 
-    return res > STUDTRASHHOLD;
+    return res > STUDENT_THRESHOLD;
 }
 
 std::ostream& operator<<(std::ostream& os, const Student& s)

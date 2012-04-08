@@ -1,24 +1,23 @@
-//
-//  Student.h
-//  CourseRecommender
-//
-//  Created by Kirill Kliavin on 13/03/12.
-//  Copyright (c) 2012 RMIT. All rights reserved.
-//
-
 #ifndef CourseRecommender_Student_h
 #define CourseRecommender_Student_h
-
-
-
-#endif
 
 #include <iostream>
 #include <string>
 #include <math.h>
 
-const float STUDENTWEIGHTS[4] = {0.2,0.2,0.1,0.5};    // undergrad,gender,local,GPA
-const float STUDTRASHHOLD = 0.5;
+#define W_UNDERGRAD 0.2
+#define W_GENDER 0.2
+#define W_LOCAL 0.1
+#define W_GPA 0.5
+
+#define STUDENT_THRESHOLD 0.5
+
+#ifndef STD_CNT
+#define STD_CNT 10
+#endif
+
+/* Undergrad, Gender, Local, GPA */
+const float STUDENTWEIGHTS[4] = {W_UNDERGRAD, W_GENDER, W_LOCAL, W_GPA};    
 
 class Student{
 
@@ -42,3 +41,5 @@ public:
     bool compare(const Student&);
     friend std::ostream& operator<<(std::ostream& os, const Student& s);
 };
+
+#endif
