@@ -14,36 +14,52 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Required Libs
 #include "Student.h"
 #include "Course.h"
-using namespace std;
 
+// Custom Defines
 #define STD_CNT 10
-
 #define NUMBER_OF_COURSES 4
 
-typedef struct NewStudentType 
-{
+using namespace std;
+
+/*****************
+ * Special Types *
+ *****************/
+
+typedef struct NewStudentType {
     Student studentInfo;
     Course  courseInfo[NUMBER_OF_COURSES];
 } NewStudent;
 
-//it is possible to write method,
-//but we have to make virtual class
-//with makeFromFromString(string) method
-vector<Student> readStudents(string);
-vector<Course> readCourses(string);
-NewStudent createNewStudent();
-bool generateWekaFile(vector<Student>&, vector<Course>&);
+
+/**********************
+ * Function Prototypes *
+ **********************/
+
+// Print student/course
 void print(vector<Student>&);
 void print(vector<Course>&);
+
+// File operations
+vector<Student> readStudents(string);
+vector<Course> readCourses(string);
+
+// Create new student
+NewStudent createNewStudent();
+
+// Estimate similarities 
 vector<Student>* getSimilarByStudent(vector<Student>&, Student&);
 vector<Student>* getSimilarByCourses(vector<Student>&, vector<Course>&, NewStudent);
 vector<Course>* getRecomendedCourses(vector<Student>&, vector<Course>&, NewStudent&);
+
+// Additional 
 int getMaxCourse(NewStudent&);
+bool generateWekaFile(vector<Student>&, vector<Course>&);
 
 
-
+// ENTRY POINT
 int main (int argc, const char * argv[])
 {
     
@@ -54,8 +70,9 @@ int main (int argc, const char * argv[])
     cout << "Students count:\t"<< students.size() << endl;
     cout << "Courses count:\t" << courses.size() << endl;
     
-    
+    /* Uncomment the following line to generate Weka file during runtime */
     //generateWekaFile(students, courses);
+    
     cout << "\n All Students" << endl;
     print(students);
     cout << "\n All Courses" << endl;
@@ -74,51 +91,19 @@ int main (int argc, const char * argv[])
     vector<Course>* resCourses =  getRecomendedCourses(*cStudents, courses, newStudent);
     cout << "\n Recomended Courses" << endl;
     print(*resCourses);
-//    
-//    cout << resCourses->at(0).Id() <<"\t"<<resCourses->at(1).Id()<<"\t"<<resCourses->at(2).Id()<<endl;
-//    cout<<endl;
-//    
+    //    
+    //    cout << resCourses->at(0).Id() <<"\t"<<resCourses->at(1).Id()<<"\t"<<resCourses->at(2).Id()<<endl;
+    //    cout<<endl;
+    //    
     return 0;
 }
 
-bool generateWekaFile(vector<Student>& students, vector<Course>& courses)
-{    
 
-    ofstream wekaFile;
-    wekaFile.open("data.arff");
-    
-    const string classes[] = {"unknown","very_bad", "bad", "satisfactory", "good", "excellent"};
-    
-    wekaFile << "@RELATION " << "STUDENT_RATE_FOR_COURSE\n\n";
-    // Student section
-    wekaFile << "@ATTRIBUTE " << "undergrad " << "{0,1}\n";
-    wekaFile << "@ATTRIBUTE " << "female " << "{0,1}\n";
-    wekaFile << "@ATTRIBUTE " << "local " << "{0,1}\n";
-    wekaFile << "@ATTRIBUTE " << "gpa " << "NUMERIC\n";
+/******************
+ * File Operations *
+ ******************/
 
-    // Course section    course,lecturer,tutor,core
-    wekaFile << "@ATTRIBUTE " << "course " << "NUMERIC\n";
-    wekaFile << "@ATTRIBUTE " << "lecturer " << "NUMERIC\n";
-    wekaFile << "@ATTRIBUTE " << "tutor " << "NUMERIC\n";
-    wekaFile << "@ATTRIBUTE " << "core " << "{0,1}\n";
-    wekaFile << "@ATTRIBUTE " << "class " << "{unknown,very_bad,bad,satisfactory,good,excellent}" << "\n\n";
-    
-    wekaFile << "@DATA\n";
-    
-    for(int i=0; i<students.size(); i++)
-    {   
-        for (int j=0; j<courses.size(); j++)
-        {
-            wekaFile << students[i].Undergraduate() << "," << students[i].Female() << "," << students[i].Local() << "," << students[i].GPA() << ",";
-            wekaFile << courses[j].Id() << "," << courses[j].Lecturer() << "," << courses[j].Tutor() << "," << courses[j].Elective() << ",";
-            wekaFile << classes[courses[j].Students()[i]] << "\n";
-        }
-    }
-    
-    wekaFile.close();
-    return true;
-}
-
+// Read students data from file
 vector<Student> readStudents(string path)
 {
     
@@ -139,6 +124,7 @@ vector<Student> readStudents(string path)
     return students;    
 }
 
+// Read courses data from file
 vector<Course> readCourses(string path)
 {
     vector<Course> students;    
@@ -178,7 +164,7 @@ NewStudent createNewStudent()
     } catch (exception c) {
         cout << "Input Error" << endl;
     }
- 
+    
     cout << endl << endl;
     
     newStudent.studentInfo=Student(0,u,f,l,gpa);
@@ -188,18 +174,18 @@ NewStudent createNewStudent()
     
     try{
         for (int i=0; i<NUMBER_OF_COURSES; i++) {
-                
+            
             cout << "Enter corses " << i+1 <<" details\n";
             
             cout << "Course:\t";
             cin >> c;
-
+            
             cout << "Lecturer:\t";
             cin >> le;
-
+            
             cout << "Tutor:\t";
             cin >> t;
-
+            
             cout << "Elective (1/0):\t";
             cin >> e; 
             cout << "Rating (1-5):\t";
@@ -208,18 +194,21 @@ NewStudent createNewStudent()
             cout << endl << endl;
             
             //temporary
-//            newStudent.courseInfo[i] = Course(0,0,0,0,0);
-           
+            //            newStudent.courseInfo[i] = Course(0,0,0,0,0);
+            
         }
     }catch(exception c)
     {
         cout << "Input Error" << endl;
-
+        
     }
     return newStudent;
     
 }
 
+/***********
+ * Printers *
+ ***********/ 
 
 void print(vector<Student>& students)
 {
@@ -241,6 +230,12 @@ void print(vector<Course>& courses)
     }
 }
 
+
+/************************
+ * Estimate similarities *
+ ************************/ 
+
+// By student data
 vector<Student>* getSimilarByStudent(vector<Student>& list, Student& s)
 {
     vector<Student>* res = new vector<Student>();
@@ -252,6 +247,7 @@ vector<Student>* getSimilarByStudent(vector<Student>& list, Student& s)
     return res;
 }
 
+// By course data
 vector<Student>* getSimilarByCourses(vector<Student>& students, vector<Course>& courses, NewStudent newStudent)
 {
     vector<Student> *res = new vector<Student>();
@@ -263,16 +259,16 @@ vector<Student>* getSimilarByCourses(vector<Student>& students, vector<Course>& 
             for (int k=0; k<students.size(); k++){
                 if (!courses[i].Students()[students[k].Id()-1])
                     continue;
-            
+                
                 if (newStudent.courseInfo[j].compare(courses[i], students[k].Id()-1)){
-                       bool flag = true;
-                        for (int f=0; f<res->size(); f++) {
-                            if (res->at(f).Id() == students[k].Id()){
-                                flag = false;
-                                break;
-                            }
+                    bool flag = true;
+                    for (int f=0; f<res->size(); f++) {
+                        if (res->at(f).Id() == students[k].Id()){
+                            flag = false;
+                            break;
                         }
-                        if (flag) res->push_back(students[k]);
+                    }
+                    if (flag) res->push_back(students[k]);
                 }
             }
         }
@@ -280,16 +276,19 @@ vector<Student>* getSimilarByCourses(vector<Student>& students, vector<Course>& 
     cout << "\nAlike students: " << res->size();
     return res;
 }
+
+// Get max course
 int getMaxCourse(NewStudent& s){
     int res = 0;
     
     for (int i=0; i<NUMBER_OF_COURSES; i++)
         if (s.courseInfo[i].Id() > res)
             res= s.courseInfo[i].Id();
-        
+    
     return res;
 }
 
+// Get recommended
 vector<Course>* getRecomendedCourses(vector<Student>& students, vector<Course>& courses, NewStudent& s)
 {
     vector<Course>* res = new vector<Course>();
@@ -307,7 +306,7 @@ vector<Course>* getRecomendedCourses(vector<Student>& students, vector<Course>& 
                 unique = false;
                 break;
             }
-                
+            
         }
         if (courses[j].Id() <= maxCourse || !unique) {
             continue;                
@@ -317,17 +316,17 @@ vector<Course>* getRecomendedCourses(vector<Student>& students, vector<Course>& 
         for(int i =0; i< students.size(); i ++){
             if(courses[j].Students()[students[i].Id()-1]){
                 ratingSum+=courses[j].Students()[i];
-                    coursesCount++;                
+                coursesCount++;                
             }
         }
-         cout << "Course " << courses[j].Id() << " AVG = " << ratingSum/coursesCount << endl;
+        cout << "Course " << courses[j].Id() << " AVG = " << ratingSum/coursesCount << endl;
         if(ratingSum/coursesCount >= 3.0){
             res->push_back(courses[j]);
             coursesToRecommend[recommendedCnt++] = ratingSum/coursesCount;
             //cout << "Course " << courses[j].Id() << " AVG= " << ratingSum/coursesCount << endl;
         }
     }
-   
+    
     bool sorted = false;
     while (!sorted) {
         sorted = true;
@@ -349,5 +348,48 @@ vector<Course>* getRecomendedCourses(vector<Student>& students, vector<Course>& 
     return res;
 }
 
-            
+
+/*************
+ * Additional *
+ *************/ 
+
+// This method generates Weka file which may be used for analyzing data
+bool generateWekaFile(vector<Student>& students, vector<Course>& courses)
+{    
+    
+    ofstream wekaFile;
+    wekaFile.open("data.arff");
+    
+    const string classes[] = {"unknown","very_bad", "bad", "satisfactory", "good", "excellent"};
+    
+    wekaFile << "@RELATION " << "STUDENT_RATE_FOR_COURSE\n\n";
+    // Student section
+    wekaFile << "@ATTRIBUTE " << "undergrad " << "{0,1}\n";
+    wekaFile << "@ATTRIBUTE " << "female " << "{0,1}\n";
+    wekaFile << "@ATTRIBUTE " << "local " << "{0,1}\n";
+    wekaFile << "@ATTRIBUTE " << "gpa " << "NUMERIC\n";
+    
+    // Course section (course,lecturer,tutor,core)
+    wekaFile << "@ATTRIBUTE " << "course " << "NUMERIC\n";
+    wekaFile << "@ATTRIBUTE " << "lecturer " << "NUMERIC\n";
+    wekaFile << "@ATTRIBUTE " << "tutor " << "NUMERIC\n";
+    wekaFile << "@ATTRIBUTE " << "core " << "{0,1}\n";
+    wekaFile << "@ATTRIBUTE " << "class " << "{unknown,very_bad,bad,satisfactory,good,excellent}" << "\n\n";
+    
+    wekaFile << "@DATA\n";
+    
+    for(int i=0; i<students.size(); i++)
+    {   
+        for (int j=0; j<courses.size(); j++)
+        {
+            wekaFile << students[i].Undergraduate() << "," << students[i].Female() << "," << students[i].Local() << "," << students[i].GPA() << ",";
+            wekaFile << courses[j].Id() << "," << courses[j].Lecturer() << "," << courses[j].Tutor() << "," << courses[j].Elective() << ",";
+            wekaFile << classes[courses[j].Students()[i]] << "\n";
+        }
+    }
+    
+    wekaFile.close();
+    return true;
+}
+
 
