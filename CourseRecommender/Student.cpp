@@ -21,23 +21,23 @@ Student::Student(int id, bool undergraduate, bool female, bool local, int gpa)
 }
 Student::Student(std::string record)
 {
-     //try{
+    //try{
     
-        //string->char* !magic!
-        const char* number = std::strtok (const_cast<char*>(record.c_str()),",");
-        id = atoi(number);
-        
-        number = strtok (NULL, ",");
-        undergraduate = atoi(number);
-        
-        number = strtok (NULL, ",");
-        female = atoi(number);
-        
-        number = strtok (NULL, ",");
-        local = atoi(number);
-        
-        number = strtok (NULL, ",");
-        gpa = atof(number);  
+    //string->char* !magic!
+    const char* number = std::strtok (const_cast<char*>(record.c_str()),",");
+    id = atoi(number);
+    
+    number = strtok (NULL, ",");
+    undergraduate = atoi(number);
+    
+    number = strtok (NULL, ",");
+    female = atoi(number);
+    
+    number = strtok (NULL, ",");
+    local = atoi(number);
+    
+    number = strtok (NULL, ",");
+    gpa = atof(number);  
     
     //}catch(){}
     //

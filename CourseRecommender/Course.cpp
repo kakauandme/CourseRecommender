@@ -21,9 +21,9 @@ Course::Course(int id, int lecturer, int tutor, bool elective, int* students)
     this->lecturer = lecturer;
     this->tutor = tutor;
     this->elective = elective; 
-        for (int i=0; i<studentsCount; i++)
-            this->students[i] = students[i];
-        
+    for (int i=0; i<studentsCount; i++)
+        this->students[i] = students[i];
+    
 }
 Course::Course(int id, int lecturer, int tutor, bool elective, int rating)
 {
@@ -38,25 +38,25 @@ Course::Course(std::string record)
     
     //try{
     
-        //string->char* !magic!
-        const char* number = std::strtok (const_cast<char*>(record.c_str()),",");
-        id = atoi(number);
-        
-        number = strtok (NULL, ",");
-        lecturer = atoi(number);
-        
-        number = strtok (NULL, ",");
-        tutor = atoi(number);
-        
-        number = strtok (NULL, ",");
-        elective= atoi(number);
-        
-        for (int i =0; i<studentsCount; i++) {
-            if((number = strtok (NULL, ",")))
-                students[i] = atoi(number);
-            else
-                students[i] = 0;
-        }
+    //string->char* !magic!
+    const char* number = std::strtok (const_cast<char*>(record.c_str()),",");
+    id = atoi(number);
+    
+    number = strtok (NULL, ",");
+    lecturer = atoi(number);
+    
+    number = strtok (NULL, ",");
+    tutor = atoi(number);
+    
+    number = strtok (NULL, ",");
+    elective= atoi(number);
+    
+    for (int i =0; i<studentsCount; i++) {
+        if((number = strtok (NULL, ",")))
+            students[i] = atoi(number);
+        else
+            students[i] = 0;
+    }
     //}catch(){}
 }
 

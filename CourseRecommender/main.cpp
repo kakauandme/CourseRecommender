@@ -53,9 +53,9 @@ NewStudent createNewStudent();
 vector<Student>* getSimilarByStudent(vector<Student>&, Student&);
 vector<Student>* getSimilarByCourses(vector<Student>&, vector<Course>&, NewStudent);
 vector<Course>* getRecomendedCourses(vector<Student>&, vector<Course>&, NewStudent&);
+int getMaxCourse(NewStudent&);
 
 // Additional 
-int getMaxCourse(NewStudent&);
 bool generateWekaFile(vector<Student>&, vector<Course>&);
 
 

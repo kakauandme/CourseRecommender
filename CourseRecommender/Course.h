@@ -28,7 +28,7 @@ private:
     int tutor;
     bool elective;
     int students[studentsCount];
-
+    
 public:
     
     Course();

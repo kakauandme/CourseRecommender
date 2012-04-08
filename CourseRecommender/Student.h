@@ -21,17 +21,15 @@ const float STUDENTWEIGHTS[4] = {0.2,0.2,0.1,0.5};    // undergrad,gender,local,
 const float STUDTRASHHOLD = 0.5;
 
 class Student{
+
 private:
-    
     int id;
     bool undergraduate;
     bool female;
     bool local;
     int gpa;
     
-    
-public:
-    
+public:    
     Student();
     Student(int, bool, bool, bool, int);
     Student(std::string);
@@ -43,7 +41,4 @@ public:
     int GPA();
     bool compare(const Student&);
     friend std::ostream& operator<<(std::ostream& os, const Student& s);
-    
-    
-        
 };
