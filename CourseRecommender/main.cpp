@@ -54,35 +54,37 @@ bool generateWekaFile(vector<Student>&, vector<Course>&);
 // ENTRY POINT
 int main (int argc, const char * argv[])
 {
-    
+    //Read from file test data !!!!!!!!! change to argv[0] and argv[1]
     vector<Student> students = readStudents("student.csv");
-    vector<Course> courses = readCourses("course.csv");
-    NewStudent newStudent;
+    vector<Course> courses = readCourses("course.csv");    
     
     cout << "Students count:\t"<< students.size() << endl;
     cout << "Courses count:\t" << courses.size() << endl;
-    
-    /* Uncomment the following line to generate Weka file during runtime */
-    //generateWekaFile(students, courses);
     
     cout << "\n All Students" << endl;
     print(students);
     cout << "\n All Courses" << endl;
     print(courses);
     
-    newStudent = createNewStudent();
+    //Sample student 
+    NewStudent newStudent = createNewStudent();
     
+    
+    //Step 1: Student profile information similarity
     vector<Student>* sStudents =  getSimilarByStudent(students, newStudent.studentInfo);    
     cout << "\n Students by characteristics" << endl;
     print(*sStudents);
     
-    
+    //Step 2: Corses similarity according to student's ratings
     vector<Student>* cStudents = getSimilarByCourses(*sStudents, courses, newStudent);
     cout << "\n Students by courses" << endl;
     print(*cStudents);
+    
+    //Step 3: Get courses from most similar students which are new to "sample student" 
     vector<Course>* resCourses =  getRecomendedCourses(*cStudents, courses, newStudent);
     cout << "\n Recomended Courses" << endl;
     print(*resCourses);
+    
     //    
     //    cout << resCourses->at(0).Id() <<"\t"<<resCourses->at(1).Id()<<"\t"<<resCourses->at(2).Id()<<endl;
     //    cout<<endl;
@@ -165,6 +167,7 @@ NewStudent createNewStudent()
     bool e;
     
     try{
+        //NUMBER_OF_COURSES should be entered by user !!!!!!!!
         for (int i=0; i<NUMBER_OF_COURSES; i++) {
             
             cout << "Enter corses " << i+1 <<" details\n";
@@ -186,7 +189,7 @@ NewStudent createNewStudent()
             cout << endl << endl;
             
             //temporary
-            //            newStudent.courseInfo[i] = Course(0,0,0,0,0);
+            //newStudent.courseInfo[i] = Course(0,0,0,0,0);
             
         }
     }catch(exception c)
@@ -235,7 +238,7 @@ vector<Student>* getSimilarByStudent(vector<Student>& list, Student& s)
         if(s.compare(list[i]))
             res->push_back(list[i]);
     }
-    
+    //Add if for 0 sudents !!!!!!!!!!!!!!!!!!!!!!!
     return res;
 }
 
@@ -265,11 +268,12 @@ vector<Student>* getSimilarByCourses(vector<Student>& students, vector<Course>& 
             }
         }
     }
-    cout << "\nAlike students: " << res->size();
+   // cout << "\nAlike students: " << res->size();
+    //Add if for 0 sudents !!!!!!!!!!!!!!!!!!!!!!!
     return res;
 }
 
-// Get max course
+// Finds latest course of Sample Student for "prerequisite feature"
 int getMaxCourse(NewStudent& s){
     int res = 0;
     
@@ -318,7 +322,7 @@ vector<Course>* getRecomendedCourses(vector<Student>& students, vector<Course>& 
             //cout << "Course " << courses[j].Id() << " AVG= " << ratingSum/coursesCount << endl;
         }
     }
-    
+    //sorts recomended courses
     bool sorted = false;
     while (!sorted) {
         sorted = true;
@@ -337,6 +341,8 @@ vector<Course>* getRecomendedCourses(vector<Student>& students, vector<Course>& 
             }
         }
     }    
+    
+    //Add if for 0 courses !!!!!!!!!!!!!!!!!!!!!!!
     return res;
 }
 
