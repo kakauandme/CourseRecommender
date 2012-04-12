@@ -1,0 +1,54 @@
+Assignment 1: Course Recommender System Report | Intelligent Web Systems | RMIT
+
+Students Involved:
+Kyrylo Kliavin (s3319067)
+Daniil Stankevich (s3336691)
+
+The objective was to implement a recommender system that will be able to recommend three courses for a new student based on his or her characteristics (courses finished) and history data (existing students information).
+
+Having analysed the data provided (students and courses files) we came up with an approach that resulted in a good approximation of the estimation required. The idea, algorithms and performance we used discussed further.
+
+1. Idea and Algorithms
+The main idea was to carefully and accurately intersect different heaps of data in order to minimise the final set as much as possible.
+
+First, we took all the personal (student info) data gathered from the new student and used that as a filter for generation a new subset of all the students. As a result we have got a table of students with corresponding similarity factor. Similarity factor mentioned before is a real number between 0 and 1 which shows how much two students have in common. This factor is calculated as a sum of all the multiplications of students' characteristics by corresponding weights*. The generated subset will contain all the students with a similarity factor greater than SSTH (student similarity threshold). SSTH defined as a constant number and equals 0.5 (50%).
+
+Second, having got the narrowed table of all the students we start to find those who would satisfy the second filter condition. These are the similar students by course information provided. This calculations are also based on weights* for their characteristics where for each student there will be generated its own similarity factor (used the same concept). However, we made this factor more accurate by increasing the CSTH (course similarity threshold) to 0.7. That is the place where lecturers and tutors ratings are taken into account.
+
+Third, such filtering gave us a very good approximation of a subset required of the courses which are quite likely to be appropriate for recommendation for a new student. 
+
+As a final step the system generates a list of recommended courses, where prerequisites for already finished courses for a new student will be ignored. The resulting list of courses gets sorted by the factor that will take into consideration course ratings. First three courses are the courses to recommend to a new student.
+
+* Both student and course weight vectors can be found in appendix 1 of this document.
+
+2. Performance 
+As a matter of fact we needed thee sub-methods/algorithms to achieve the goal. One for finding similar students by characteristics, another one for finding appropriate courses set and the last one for recommending the courses. 
+
+We split the whole process into three corresponding steps which have their own complexity estimated as follows in order to generate the final set .
+
+The complexity of the first method is linear. It requires O(n) time to generate a result where 'n' is a number of students. Basic operation is defined as a comparison function.
+
+The complexity of the second method is pseudo quadratic. It requires O(n*m) time to generate a result where 'n' is a number of students, 'm' is a number of courses.
+
+The complexity of the third method is pseudo quadratic as well. It requires O(n*m) time to generate a result, where 'n' is a number of courses, 'm' is a number of students, but in fact 'm' will be much lower than in the previous method due to filtering. Furthermore, at each iteration of this algorithm there is a check performed in order to skip the courses which are prerequisites to already taken. It may decrease the time required by 'm - {number of courses taken}' ideally.
+
+3. Results
+<TODO>
+
+4. Implementation details
+The systems written in a combination of C/C++ programming languages using STL library. Application interface is console-based. Language standard used: "std=c99". Requires "g++" compiler.
+
+5. Appendix 1
+Student characteristics weights vector defined as follows: 
+Ws = <x1, x2, x3, x4> = <0.2, 0.2, 0.1, 0.5>;
+x1 - undergraduate/postgraduade; 
+x2 - gender (male/female);
+x3 - local/international;
+x4 - GPA;
+
+Course characteristics weights vector defined as follows: 
+Wc = <y1, y2, y3, y4> = <0.2, 0.1, 0.1, 0.6>;
+y1 - course; 
+y2 - lecturer;
+y3 - tutor;
+y4 - rating;
