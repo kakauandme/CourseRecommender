@@ -145,7 +145,7 @@ NewStudent createNewStudent()
 {
     NewStudent newStudent;
     bool u,f,l;
-    int gpa,cf;
+    int gpa;
     try {
         cout << "\nEnter new student details \n";
         cout << "Undergraduate:\t";
