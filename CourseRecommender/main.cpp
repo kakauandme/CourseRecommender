@@ -86,10 +86,8 @@ int main (int argc, const char * argv[])
     cout << "\n Recomended Courses" << endl;
     print(*resCourses);
     
-    //    
-    //    cout << resCourses->at(0).Id() <<"\t"<<resCourses->at(1).Id()<<"\t"<<resCourses->at(2).Id()<<endl;
-    //    cout<<endl;
-    //    
+    cout <<"\nRecomended Courses:\t" << resCourses->at(0).Id() <<"\t"<<resCourses->at(1).Id()<<"\t"<<resCourses->at(2).Id()<<endl;
+    cout<<endl;
     return 0;
 }
 
@@ -319,7 +317,7 @@ vector<Course>* getRecomendedCourses(vector<Student>& students, vector<Course>& 
                 coursesCount++;                
             }
         }
-        cout << "Course " << courses[j].Id() << " AVG = " << ratingSum/coursesCount << endl;
+        cout << "Course " << courses[j].Id() << " AVG rating = " << ratingSum/coursesCount << endl;
         if(ratingSum/coursesCount >= 2.0){
             res->push_back(courses[j]);
             coursesToRecommend[recommendedCnt++] = ratingSum/coursesCount;
