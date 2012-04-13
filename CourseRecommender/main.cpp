@@ -55,9 +55,21 @@ bool generateWekaFile(vector<Student>&, vector<Course>&);
 // ENTRY POINT
 int main (int argc, const char * argv[])
 {
-    //Read from file test data !!!!!!!!! change to argv[0] and argv[1]
-    vector<Student> students = readStudents("student.csv");
-    vector<Course> courses = readCourses("course.csv");    
+    if (argc != 3) {
+        cout << "Please pass student test data file path as argument 1, and course test data file as argument 2" << endl;
+        return 0;
+    }
+    
+    //Read from file test data 
+    string sFile = argv[1];
+    string cFile = argv[2];
+    vector<Student> students = readStudents(sFile);
+    vector<Course> courses = readCourses(cFile);   
+    
+    if (!students.size()|| !courses.size()) {
+        cout << "Please pass student test data file path as argument 1, and course test data file as argument 2" << endl;
+        return 0;
+    }
     
     cout << "Students count:\t"<< students.size() << endl;
     cout << "Courses count:\t" << courses.size() << endl;
@@ -114,13 +126,16 @@ vector<Student> readStudents(string path)
         }
         myfile.close();
     }
+    else{
+        cout << "Cannot read student test data file" << endl;
+    }
     return students;    
 }
 
 // Read courses data from file
 vector<Course> readCourses(string path)
 {
-    vector<Course> students;    
+    vector<Course> courses;    
     string line;
     
     ifstream myfile (path.c_str());
@@ -130,12 +145,15 @@ vector<Course> readCourses(string path)
         {
             getline (myfile,line);
             if(line[0]!= '#'){
-                students.push_back(Course(line));
+                courses.push_back(Course(line));
             }
         }
         myfile.close();
     }
-    return students;    
+    else{
+        cout << "Cannot read course test data file" << endl;
+    }
+    return courses;    
 }
 
 
@@ -169,7 +187,6 @@ NewStudent createNewStudent()
     bool e;
     
     try{
-        //NUMBER_OF_COURSES should be entered by user !!!!!!!!
         for (int i=0; i<newStudent.coursesFinished; i++) {
             
             cout << "Enter corses " << i+1 <<" details\n";
