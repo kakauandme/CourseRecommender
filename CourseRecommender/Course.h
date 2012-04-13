@@ -6,10 +6,10 @@
 #include <math.h>
 
 #define W_COURSE 0.2
-#define W_LECTURER 0.1
+#define W_LECTURER 0.2
 #define W_TUTOR 0.1
-#define W_RATING 0.6
-#define W_CORE 0 // need to define?
+#define W_RATING 0.5
+//#define W_CORE 0
 
 #define COURSE_THRESHOLD 0.7
 

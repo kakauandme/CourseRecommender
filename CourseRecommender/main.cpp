@@ -23,6 +23,7 @@ using namespace std;
 typedef struct NewStudentType {
     Student studentInfo;
     Course  courseInfo[NUMBER_OF_COURSES];
+    int coursesFinished;
 } NewStudent;
 
 
@@ -144,7 +145,7 @@ NewStudent createNewStudent()
 {
     NewStudent newStudent;
     bool u,f,l;
-    int gpa;
+    int gpa,cf;
     try {
         cout << "\nEnter new student details \n";
         cout << "Undergraduate:\t";
@@ -161,6 +162,9 @@ NewStudent createNewStudent()
     
     cout << endl << endl;
     
+    cout << "Courses finished:\t";
+    cin >> newStudent.coursesFinished;
+    
     newStudent.studentInfo=Student(0,u,f,l,gpa);
     
     int c,le,t,r;
@@ -168,7 +172,7 @@ NewStudent createNewStudent()
     
     try{
         //NUMBER_OF_COURSES should be entered by user !!!!!!!!
-        for (int i=0; i<NUMBER_OF_COURSES; i++) {
+        for (int i=0; i<newStudent.coursesFinished; i++) {
             
             cout << "Enter corses " << i+1 <<" details\n";
             
@@ -247,7 +251,7 @@ vector<Student>* getSimilarByCourses(vector<Student>& students, vector<Course>& 
 {
     vector<Student> *res = new vector<Student>();
     for(int i=0; i<courses.size(); i++) {
-        for (int j=0; j<NUMBER_OF_COURSES; j++){
+        for (int j=0; j<newStudent.coursesFinished; j++){
             if(newStudent.courseInfo[j].Id() !=  courses[i].Id())
                 continue;
             
@@ -277,7 +281,7 @@ vector<Student>* getSimilarByCourses(vector<Student>& students, vector<Course>& 
 int getMaxCourse(NewStudent& s){
     int res = 0;
     
-    for (int i=0; i<NUMBER_OF_COURSES; i++)
+    for (int i=0; i<s.coursesFinished; i++)
         if (s.courseInfo[i].Id() > res)
             res= s.courseInfo[i].Id();
     
@@ -297,7 +301,7 @@ vector<Course>* getRecomendedCourses(vector<Student>& students, vector<Course>& 
     bool unique = false;
     for(int j=0; j<courses.size();j++){
         unique = true;
-        for(int k = 0; k< NUMBER_OF_COURSES; k++){
+        for(int k = 0; k< s.coursesFinished; k++){
             if(courses[j].Id() == s.courseInfo[k].Id() ){
                 unique = false;
                 break;
@@ -311,12 +315,12 @@ vector<Course>* getRecomendedCourses(vector<Student>& students, vector<Course>& 
         coursesCount=0;
         for(int i =0; i< students.size(); i ++){
             if(courses[j].Students()[students[i].Id()-1]){
-                ratingSum+=courses[j].Students()[i];
+                ratingSum+=courses[j].Students()[students[i].Id()-1];
                 coursesCount++;                
             }
         }
         cout << "Course " << courses[j].Id() << " AVG = " << ratingSum/coursesCount << endl;
-        if(ratingSum/coursesCount >= 3.0){
+        if(ratingSum/coursesCount >= 2.0){
             res->push_back(courses[j]);
             coursesToRecommend[recommendedCnt++] = ratingSum/coursesCount;
             //cout << "Course " << courses[j].Id() << " AVG= " << ratingSum/coursesCount << endl;

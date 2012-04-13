@@ -4,18 +4,25 @@ Students Involved:
 Kyrylo Kliavin (s3319067)
 Daniil Stankevich (s3336691)
 
-The objective was to implement a recommender system that will be able to recommend three courses for a new student based on his or her characteristics (courses finished) and history data (existing students information).
+The objective was to implement a recommender system that will be able to recommend three courses for a new student based on his or her characteristics (personal information and courses finished) and history data (existing students information).
 
 Having analysed the data provided (students and courses files) we came up with an approach that resulted in a good approximation of the estimation required. The idea, algorithms and performance we used discussed further.
 
 1. Idea and Algorithms
-The main idea was to carefully and accurately intersect different heaps of data in order to minimise the final set as much as possible.
 
-First, we took all the personal (student info) data gathered from the new student and used that as a filter for generation a new subset of all the students. As a result we have got a table of students with corresponding similarity factor. Similarity factor mentioned before is a real number between 0 and 1 which shows how much two students have in common. This factor is calculated as a sum of all the multiplications of students' characteristics by corresponding weights*. The generated subset will contain all the students with a similarity factor greater than SSTH (student similarity threshold). SSTH defined as a constant number and equals 0.5 (50%).
+Briefly, algorithm consists from 3 steps:
+	- make a subset of students which a similar to sample student by their personal information
+	- make a subset of students which a similar by courses preferences
+	- find out highly recommended courses by similar students, which have not ben taken by sample student and satisfy prerequisite rule
+
+
+In step 1, we took all the personal (student info) data gathered from the new student and used that as a filter for generation a new subset of all the students. As a result we have got a table of students with corresponding similarity factor. Similarity factor mentioned before is a real number between 0 and 1 which shows how much two students have in common. This factor is calculated as a sum of all the multiplications of students' characteristics by corresponding weights*. The generated subset will contain all the students with a similarity factor greater than SSTH (student similarity threshold). SSTH defined as a constant number and equals 0.5 (50%).
+
+Example:
 
 All Students
 ID	U	F	L	GPA
--------------------------------------
+-----------------
 1	1	1	1	3	
 2	1	1	0	3	
 3	0	0	1	3	
@@ -26,15 +33,15 @@ ID	U	F	L	GPA
 8	1	1	0	4	
 9	0	0	1	3	
 10	1	0	1	2	
--------------------------------------
+-----------------
 Sample Student
 ID	U	F	L	GPA
--------------------------------------
+-----------------
 1	1	1	1	3
 
 
 Similarity results
--------------------------------------
+-----------------------
 Student 0 VS 1	|1   !	
 Student 0 VS 2	|0.9 !
 Student 0 VS 3	|0.6 !
@@ -45,21 +52,21 @@ Student 0 VS 7	|0.3
 Student 0 VS 8	|0.4
 Student 0 VS 9	|0.6 !
 Student 0 VS 10	|0.3
---------------------------------------
+-----------------------
 
 Students by characteristics
 ID	U	F	L	GPA
--------------------------------------
+-----------------------
 1	1	1	1	3	
 2	1	1	0	3	
 3	0	0	1	3	
 9	0	0	1	3
 	
-Second, having got the narrowed table of all the students we start to find those who would satisfy the second filter condition. These are the similar students by course information provided. This calculations are also based on weights* for their characteristics where for each student there will be generated its own similarity factor (used the same concept). However, we made this factor more accurate by increasing the CSTH (course similarity threshold) to 0.7. That is the place where lecturers and tutors ratings are taken into account.
+In step 2, having got the narrowed table of all the students we start to find those who would satisfy the second filter condition. These are the similar students by course information provided. This calculations are also based on weights* for course characteristics where for each course there will be generated its own similarity factor (used the same concept). However, we made this factor more accurate by increasing the CSTH (course similarity threshold) to 0.7. That is the place where lecturers and tutors ratings are taken into account.
 
 All Courses
 ID	L	T	E	S1	S2	S3	S4	S5	S6	S7	S8	S9	S10
---------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------
 1	1	1	1	2	1	3	3	2	1	4	3	2	0	
 1	2	1	1	4	3	5	5	5	4	4	5	4	0	
 2	1	2	1	2	1	2	3	3	1	1	4	2	2	
@@ -72,17 +79,17 @@ ID	L	T	E	S1	S2	S3	S4	S5	S6	S7	S8	S9	S10
 7	1	1	0	2	1	3	3	3	1	1	4	2	1	
 8	2	1	0	2	2	3	4	4	2	2	5	3	2	
 9	5	1	0	1	2	3	4	2	2	4	2	2	0	
---------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------
 Sample Student courses
 ID	L	T	E	S0
---------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------
 1	1	1	1	4
 1	2	1	1	5
 5	3	5	1	5
 6	4	5	1	5
 
 Similarity results
-----------------------------------------
+-------------------------------------------------------
 Course 1 of S0 VS Course 1 of S1 |0.7
 Course 1 of S0 VS Course 1 of S2 |0.55
 Course 1 of S0 VS Course 1 of S3 |0.85	!
@@ -107,25 +114,24 @@ Course 6 of S0 VS Course 6 of S1 |1	!
 Course 6 of S0 VS Course 6 of S2 |0.85	!
 Course 6 of S0 VS Course 6 of S3 |1	!
 Course 6 of S0 VS Course 6 of S9 |0.85	!
-----------------------------------------
-
+-------------------------------------------------------
 
 Students by courses
 ID	U	F	L	GPA
---------------------------------------
+-------------------
 1	1	1	1	3	
 3	0	0	1	3	
 9	0	0	1	3	
 2	1	1	0	3	
 
 
-Third, such filtering gave us a very good approximation of a subset required of the courses which are quite likely to be appropriate for recommendation for a new student. 
+Lastly, such filtering gave us a very good approximation of a students subset which will help to find out courses to recommend  to sample student. 
 
 As a final step the system generates a list of recommended courses, where prerequisites for already finished courses for a new student will be ignored. The resulting list of courses gets sorted by the factor that will take into consideration course ratings. First three courses are the courses to recommend to a new student.
 
-Course 7 AVG = 2.25	!3
-Course 8 AVG = 2.75	!1
-Course 9 AVG = 2.5	!2
+Course 7 AVG Rating = 2.25	!3
+Course 8 AVG Rating = 2.75	!1
+Course 9 AVG Rating = 2.5	!2
 
 * Both student and course weight vectors can be found in appendix 1 of this document.
 
@@ -141,7 +147,7 @@ The complexity of the second method is pseudo quadratic. It requires O(n*m) time
 The complexity of the third method is pseudo quadratic as well. It requires O(n*m) time to generate a result, where 'n' is a number of courses, 'm' is a number of students, but in fact 'm' will be much lower than in the previous method due to filtering. Furthermore, at each iteration of this algorithm there is a check performed in order to skip the courses which are prerequisites to already taken. It may decrease the time required by 'm - {number of courses taken}' ideally.
 
 3. Results
-<TODO>
+Provided algorithm gives quite good recommendation results. There are several ways to make algorithm more efficient, however due to small amount of test data,  these modifications will not show their performance. 
 
 4. Implementation details
 The systems written in a combination of C/C++ programming languages using STL library. Application interface is console-based. Language standard used: "std=c99". Requires "g++" compiler. 

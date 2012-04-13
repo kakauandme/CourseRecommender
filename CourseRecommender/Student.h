@@ -6,11 +6,11 @@
 #include <math.h>
 
 #define W_UNDERGRAD 0.2
-#define W_GENDER 0.2
+#define W_GENDER 0.3
 #define W_LOCAL 0.1
-#define W_GPA 0.5
+#define W_GPA 0.4
 
-#define STUDENT_THRESHOLD 0.5
+#define STUDENT_THRESHOLD 0.4
 
 #ifndef STD_CNT
 #define STD_CNT 10
